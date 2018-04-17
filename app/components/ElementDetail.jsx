@@ -24,10 +24,14 @@ export default class ElementDetail extends React.Component {
         <div style={{ clear: 'both' }}></div>
         <p className="name">{this.props.element.name}</p>
         <p className="description">{this.props.element.summary}</p>
-        <p className="spec-title first">Atomic number</p>
-        <p className="spec-value">{this.props.element.number}</p>
-        <p className="spec-title">Atomic mass</p>
-        <p className="spec-value">{this.props.element.atomic_mass}</p>
+        <div className="spec-box first">
+          <p className="spec-title">Atomic number</p>
+          <p className="spec-value">{this.props.element.number}</p>
+        </div>
+        <div className="spec-box">
+          <p className="spec-title">Atomic mass</p>
+          <p className="spec-value">{this.props.element.atomic_mass}</p>
+        </div>
       </div>
     );
   }
