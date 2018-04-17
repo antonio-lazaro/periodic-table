@@ -1,6 +1,6 @@
 # Periodic Table
 
-React app to learn the periodic table elements using RESCORM (boilerplate for creating SCORM-compliant React applications).
+React app to learn the periodic table of elements using RESCORM (boilerplate for creating SCORM-compliant React applications).
 
 
 # Features
