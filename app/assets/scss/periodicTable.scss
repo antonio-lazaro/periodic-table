@@ -1,0 +1,156 @@
+/* Color variables */
+$border-color: #2A3843;
+$diatomic-nonmetal-color: #23C4EA;
+$alkali-metal-color: #A3E3C0;
+$alkaline-earth-metal-color: #FFA973;
+$transition-metal-color: #fff;
+$post-transition-metal-color: #EAEAB6;
+$polyatomic-nonmetal-color: #73e0d1;
+$metalloid-color: #A3E3C0;
+$noble-gas-color: #B373E0;
+$unknown-color: #b7b7b7;
+
+$element-detail-container-color: #17232C;
+$element-detail-container-width: 318px;
+
+#scroll-container {
+	margin: 0;
+	overflow: scroll;
+}
+
+#scroll-container.selected {
+	margin-right: $element-detail-container-width + 40px;
+}
+
+#table-container {
+	
+}
+
+#periodicTable {
+	transform: scale(0.8);
+	border-collapse: collapse;
+	display: inline-block;
+}
+
+.element {
+	padding: 0;
+	margin: 0;
+	border: 1px solid $border-color;
+	line-height: 1;
+	cursor: pointer;
+	vertical-align: top;
+}
+
+.element-container {
+	width: 73px;
+	height: 73px;
+	overflow: hidden;
+}
+
+.element-atomic-number {
+	margin: 10px 10px 0 0;
+	text-align: right;
+	font-family: AvenirNext-Regular;
+	font-size: 10px;
+	user-select: none;
+	opacity: 0.8;
+}
+
+.element-symbol {
+	display: block;
+	margin: 0;
+	text-align: center;
+	font-family: AvenirNext-Medium;
+	font-size: 30px;
+	user-select: none;
+}
+
+.element-name {
+	margin: 0;
+	text-align: center;
+	font-family: AvenirNext-Regular;
+	font-size: 10px;
+	opacity: 0.22;
+	user-select: none;
+	margin-top: 4px;
+}
+
+.diatomic-nonmetal {
+	color: $diatomic-nonmetal-color;
+}
+
+.alkali-metal {
+	color: $alkali-metal-color;
+}
+
+.alkaline-earth-metal {
+	color: $alkaline-earth-metal-color;
+}
+
+.transition-metal {
+	color: $transition-metal-color;
+}
+
+.post-transition-metal {
+	color: $post-transition-metal-color;
+}
+
+.polyatomic-nonmetal {
+	color: $polyatomic-nonmetal-color;
+}
+
+.metalloid {
+	color: $metalloid-color;
+}
+
+.noble-gas {
+	color: $noble-gas-color;
+}
+
+.unknown {
+	color: $unknown-color;
+}
+
+#lantanos-cell p {
+	margin: 0;
+	text-align: center;
+	font-size: 11px;
+	color: #ffffffc4;
+	user-select: none;
+}
+
+#actinios-cell p {
+	margin: 0;
+	text-align: center;
+	font-size: 11px;
+	color: #ffffffc4;
+	user-select: none;
+}
+
+/* Element Detail */
+
+#element-detail-container {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: $element-detail-container-width;
+	background: $element-detail-container-color;
+	padding: 22px 40px;
+}
+
+#element-detail-container .symbol {
+	margin: 0;
+	font-family: AvenirNext-Medium;
+	font-size: 47px;
+	color: white;
+	margin-top: 25px;
+}
+
+#element-detail-container .name {
+	margin: 0;
+	font-family: AvenirNext-Regular;
+	font-size: 18px;
+	color: white;
+}
+

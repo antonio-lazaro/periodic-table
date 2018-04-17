@@ -1,52 +1,43 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import './../assets/scss/main.scss';
 
-import {GLOBAL_CONFIG} from '../config/config.js';
-import * as I18n from '../vendors/I18n.js';
-import * as SAMPLES from '../config/samples.js';
+import LearnPage from './LearnPage.jsx';
+import QuizPage from './QuizPage.jsx';
 
-import SCORM from './SCORM.jsx';
-import Header from './Header.jsx';
-import FinishScreen from './FinishScreen.jsx';
-import Quiz from './Quiz.jsx';
+import { PAGES } from '../constants/constants.jsx';
 
 export class App extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    I18n.init();
   }
-  render(){
-    let appHeader = "";
+
+  render() {
     let appContent = "";
 
-    if((this.props.tracking.finished !== true) || (GLOBAL_CONFIG.finish_screen === false)){
-      appHeader = (
-        <Header user_profile={this.props.user_profile} tracking={this.props.tracking} config={GLOBAL_CONFIG} I18n={I18n}/>
-      );
-      if(this.props.wait_for_user_profile !== true){
-        appContent = (
-          <Quiz dispatch={this.props.dispatch} user_profile={this.props.user_profile} tracking={this.props.tracking} quiz={SAMPLES.quiz_example} config={GLOBAL_CONFIG} I18n={I18n}/>
-        );
-      }
-    } else {
-      appContent = (
-        <FinishScreen dispatch={this.props.dispatch} user_profile={this.props.user_profile} tracking={this.props.tracking} quiz={SAMPLES.quiz_example} config={GLOBAL_CONFIG} I18n={I18n}/>
-      );
+    switch (this.props.page) {
+      case PAGES.LEARN_PAGE:
+        appContent = (<LearnPage />);
+        break;
+      case PAGES.QUIZ_PAGE:
+        appContent = (<QuizPage />);
+        break;
+      default:
+        appContent = (<LearnPage />);
     }
 
     return (
       <div id="container">
-        <SCORM dispatch={this.props.dispatch} tracking={this.props.tracking} config={GLOBAL_CONFIG}/>
-        {appHeader}
         {appContent}
       </div>
     );
   }
 }
 
-function mapStateToProps(state){
-  return state;
+function mapStateToProps(state) {
+  return {
+    page: state.page
+  };
 }
 
 export default connect(mapStateToProps)(App);

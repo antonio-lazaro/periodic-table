@@ -1,5 +1,13 @@
+/* Color variables */
+// $learn-page-color: #1F2E39;
+// $learn-page-color: #162129;
+$learn-page-color: #1a262f;
+$quiz-page-container-color: #17232C;
+
 body {
-  background-color: white;
+  margin: 0;
+  background-color: $learn-page-color;
+  font-family: AvenirNext-Regular;
 }
 
 div.header_wrapper img {
@@ -12,20 +20,67 @@ div.header_wrapper img {
 #heading {
   font-size: 30px;
   margin: 8px;
+  color: white;
 }
 
-#tracking{
-  font-size: 18px;
-  color: black;
-  margin: 8px;
+#tracking {
+  font-family: Avenir-Light;
+  font-size: 14px;
+  color: rgba(255,255,255,0.41);
 }
 
 #tracking span {
-  margin-right: 40px;
+  margin-right: 38px;
 }
 
 #logged_user {
   font-size: 18px;
   color: gray;
   margin: 8px;
+}
+
+/* Learn page */
+
+#learn-page-title {
+  margin-left: 60px;
+  margin-top: 40px;
+  font-family: AvenirNext-Regular;
+  font-size: 31px;
+  color: #fff;
+  margin-bottom: 0;
+  float: left;
+}
+
+#learn-page button {
+  border: none;
+  width: 178px;
+  height: 41px;
+  margin-top: 40px;
+  margin-left: 60px;
+  background: #00B8E3;
+  border-radius: 100px;
+  color: white;
+  font-size: 20px;
+  font-family: AvenirNext-Regular;
+  transform: scale(0.7);
+  outline: none;
+  cursor: pointer;
+}
+
+#learn-page button:hover {
+  background: #60e1ff;
+}
+
+
+/* Quiz page page */
+
+#quiz-page-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: scroll;
+  background-color: $quiz-page-container-color;
+  padding: 40px 57px;
 }

@@ -1,5 +1,29 @@
-div.finish_screen h1 {
+#finish_title {
   font-size: 28px;
-  padding: 10%;
+  padding: 3%;
   text-align: center;
+  color: white;
+}
+
+.finish_screen {
+	text-align: center;
+}
+
+.finish_screen button {
+	border: none;
+	height: 41px;
+	margin-right: 17px;
+	background: #ffffff05;
+	border-radius: 100px;
+	color: white;
+	font-size: 15px;
+	font-family: AvenirNext-Regular;
+	outline: none;
+	cursor: pointer;
+	user-select: none;
+	padding: 0 30px;
+}
+
+.finish_screen button:hover {
+	background: #ffffff17;
 }

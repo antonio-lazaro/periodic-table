@@ -62,3 +62,19 @@ export function finishApp(finished = true){
     finished:finished,
   };
 }
+
+// Page Reducer
+export function changePage(page) {
+  return {
+    type: 'CHANGE_PAGE',
+    page
+  };
+}
+
+// LarnPage Reducer
+export function selectElement(element) {
+  return {
+    type: 'SELECT_ELEMENT',
+    element
+  };
+}

@@ -5,7 +5,10 @@ import * as Utils from '../vendors/Utils.js';
 import {addObjectives, resetObjectives, finishApp} from './../reducers/actions';
 
 import QuizHeader from './QuizHeader.jsx';
+import OCQuestion from './OCQuestion.jsx';
 import MCQuestion from './MCQuestion.jsx';
+
+import { ANSWER_TYPES } from '../constants/constants.jsx';
 
 export default class Quiz extends React.Component {
   constructor(props){
@@ -18,7 +21,7 @@ export default class Quiz extends React.Component {
     let adaptive_sorted = false;
     if((this.props.config.adaptive === true) && (typeof props.user_profile === "object") && (typeof props.user_profile.learner_preference === "object") && (typeof props.user_profile.learner_preference.difficulty === "number")){
       let difficulty = props.user_profile.learner_preference.difficulty;
-      if((difficulty >= 0) && (difficulty <= 10)){
+      if((difficulty >= 0) && (difficulty <= 10)) {
         for(let i = 0; i < questions.length; i++){
           if((typeof questions[i].difficulty !== "number") || (questions[i].difficulty < 0) || (questions[i].difficulty > 10)){
             questions[i].difficulty = 5;
@@ -34,7 +37,7 @@ export default class Quiz extends React.Component {
       questions = Utils.shuffleArray(questions);
     }
 
-    if((typeof this.props.config.n === "number") && (this.props.config.n >= 1)){
+    if((typeof this.props.config.n === "number") && (this.props.config.n >= 1)) {
       // Limit number of questions
       questions = questions.slice(0, Math.min(this.props.config.n, questions.length));
     }
@@ -42,11 +45,11 @@ export default class Quiz extends React.Component {
     quiz.questions = questions;
 
     this.state = {
-      quiz:quiz,
-      current_question_index:1,
+      quiz: quiz,
+      current_question_index: 1,
     };
   }
-  componentDidMount(){
+  componentDidMount() {
     // Create objectives (One per question included in the quiz)
     let objectives = [];
     let nQuestions = this.state.quiz.questions.length;
@@ -55,7 +58,7 @@ export default class Quiz extends React.Component {
     }
     this.props.dispatch(addObjectives(objectives));
   }
-  onNextQuestion(){
+  onNextQuestion() {
     let isLastQuestion = (this.state.current_question_index === this.state.quiz.questions.length);
     if(isLastQuestion === false){
       this.setState({current_question_index:(this.state.current_question_index + 1)});
@@ -67,7 +70,7 @@ export default class Quiz extends React.Component {
     this.setState({current_question_index:1});
     this.props.dispatch(resetObjectives());
   }
-  render(){
+  render() {
     let currentQuestion = this.state.quiz.questions[this.state.current_question_index - 1];
     let isLastQuestion = (this.state.current_question_index === this.state.quiz.questions.length);
 
@@ -76,12 +79,15 @@ export default class Quiz extends React.Component {
     let onResetQuiz = this.onResetQuiz.bind(this);
     let currentQuestionRender = "";
 
-    switch (currentQuestion.type){
-    case "multiple_choice":
-      currentQuestionRender = (<MCQuestion question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished}/>);
-      break;
-    default:
-      currentQuestionRender = "Question type not supported";
+    switch (currentQuestion.answerType) {
+      case ANSWER_TYPES.SELECT_ONE_ANSWER:
+        currentQuestionRender = (<OCQuestion quizLength={this.state.quiz.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished}/>);
+        break;
+      case ANSWER_TYPES.SELECT_MULTIPLE_ANSWER:
+        currentQuestionRender = (<MCQuestion quizLength={this.state.quiz.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished}/>);
+        break;
+      default:
+        currentQuestionRender = "Question type not supported";
     }
 
     return (

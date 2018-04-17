@@ -1,10 +1,19 @@
 import React from 'react';
 import './../assets/scss/finish_screen.scss';
 
+import { changePage } from '../reducers/actions.jsx';
+
+import { PAGES } from '../constants/constants.jsx';
+
 export default class FinishScreen extends React.Component {
   constructor(props){
     super(props);
   }
+
+  handleClick() {
+    this.props.dispatch(changePage(PAGES.LEARN_PAGE));
+  }
+
   _getFinishScreenTitle(progress_measure, score){
     let finishTitleText;
     let hasProgressMeasure = (typeof progress_measure === "number");
@@ -25,7 +34,8 @@ export default class FinishScreen extends React.Component {
     let finishTitleText = this._getFinishScreenTitle(this.props.tracking.progress_measure, this.props.tracking.score);
     return (
       <div className="finish_screen">
-        <h1 id="finish_title">{finishTitleText}</h1>
+        <p id="finish_title">{finishTitleText}</p>
+        <button type="button" onClick={this.handleClick.bind(this)}>Go to Periodic Table!</button>
       </div>
     );
   }

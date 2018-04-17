@@ -85,7 +85,7 @@ export function getTrans(s, params){
  * // "i.dtest"	: "Download #{name}",
  * // getTrans("i.dtest", {name: "SCORM package"}) -> "Download SCORM package"
  */
-function getTransWithParams(trans, params){
+export function getTransWithParams(trans, params){
   if(typeof params !== "object"){
     return trans;
   }

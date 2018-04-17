@@ -1,80 +1,118 @@
-div.quizHeader p {
-  font-size: 20px;
-  margin-top: 25px;
-  margin-bottom: 20px;
+/* Quiz header */
+
+div.quizHeader {
+  display: inline-flex;
+  margin-top: 12px;
 }
 
-div.question h1 {
-  font-size: 20px;
+#progress-title {
+  font-size: 27px;
+  color: rgba(255,255,255,0.79);
+}
+
+#progress-bar {
+  width: 413px;
+  height: 13px;
+  background: rgba(255,255,255,0.10);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-right: 30px;
+  margin-top: 14px;
+}
+
+#progress-bar-progress {
+  background: rgba(255,255,255,0.34);
+  height: inherit;
+  border-radius: inherit;
+}
+
+div.quizHeader span {
+  margin: 0;
+  font-size: 19px;
+  color: rgba(255,255,255,0.39);
+  margin-right: 30px;
+}
+
+/* Quiz question */
+
+div.question p.title {
+  font-size: 28px;
+  color: white;
   margin-top: 20px;
   margin-bottom: 20px;
 }
 
+div.question div.question_choices {
+  display: inline-flex;
+  transform: scale(0.7);
+  -webkit-transform-origin-x: 0;
+}
+
 div.question div.question_choice {
-  background: white;
+  background: #1F2E39;
   margin: 10px;
   padding: 2px;
-}
-
-div.question div.question_choice div.questionC1{
-  float: left;
-  width: 35px;
-  margin-top: 9px;
-  margin-left: 10px;
-}
-
-div.question div.question_choice div.questionC2{
-  display: inline-block;
-  width: auto;
-  margin: 12px 8px 12px 8px;
-}
-
-div.question div.question_choice input[type="checkbox"] {
-  width: 23px;
-  height: 23px;
   cursor: pointer;
+  text-align: center;
+  border-radius: 11px;
+  min-width: 198px;
+  padding: 11px 30px;
 }
 
-div.question div.question_choice input[type="checkbox"][disabled]{
-  cursor: default;
+div.question div.question_choice.checked {
+  background: #7a9ab5;
 }
 
 div.question div.question_choice p {
   display: inline-block;
-  font-size: 20px;
+  font-size: 25px;
   margin: 0px 0px 0px 0px;
+  color: #FFFFFFb0;
+  user-select: none;
 }
 
-div.question div.question_choice_correct {
-  background: #bdffbd;
+div.question div.question_choice.checked.question_choice_correct {
+  background: #04C678;
 }
 
 div.question div.question_choice_incorrect {
-  background: #ffc8c8;
+  background: #FF5555;
 }
 
-div.question div.question_choice_correct, div.question div.question_choice_incorrect {
-  color: black;
-  border-radius: 25px;
+div.question div.question_choice_correct {
+  background: #04C678;
+}
+
+div.question div.question_choice.checked.question_choice_incorrect {
+  background: #FF5555;
+}
+
+div.question div.question_choice_correct p, div.question div.question_choice_incorrect p {
+  color: white;
 }
 
 div.question div.questionButtonsWrapper {
   padding: 10px;
+  margin-top: 35px;
 }
 
 div.question div.questionButtonsWrapper button.answerQuestion, div.question div.questionButtonsWrapper button.resetQuestion, div.question div.questionButtonsWrapper button.resetQuiz, div.question div.questionButtonsWrapper button.nextQuestion {
-  padding: 10px;
-  margin-left: 10px;
-  color: black;
-  background: white;
-  border: 2px solid black;
-  font-size: 15px;
-  font-weight: bold;
+  border: none;
+  width: 124px;
+  height: 41px;
+  margin-right: 20px;
+  background: #00B8E3;
+  border-radius: 100px;
+  color: white;
+  font-size: 20px;
+  font-family: AvenirNext-Regular;
+  outline: none;
   cursor: pointer;
+  user-select: none;
 }
 
 div.question div.questionButtonsWrapper button[disabled]{
+  background: #ffffff05;
   color: gray;
-  border: 2px solid gray;
   cursor: default;
 }
