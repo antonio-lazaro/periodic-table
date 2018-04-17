@@ -149,6 +149,7 @@ $element-detail-container-width: 318px;
 	width: $element-detail-container-width;
 	background: $element-detail-container-color;
 	padding: 22px 40px;
+	overflow: scroll;
 }
 
 #element-detail-container .symbol {
@@ -163,6 +164,36 @@ $element-detail-container-width: 318px;
 	margin: 0;
 	font-family: AvenirNext-Regular;
 	font-size: 18px;
+	color: white;
+}
+
+#element-detail-container .description {
+	margin: 0;
+	margin-top: 14px;
+	font-family: Avenir-Light;
+	font-size: 12px;
+	color: #ffffffba;
+	text-align: justify;
+}
+
+#element-detail-container .spec-title.first {
+	margin-top: 20px;
+}
+
+#element-detail-container .spec-title {
+	margin: 0;
+	margin-top: 10px;
+	font-family: Avenir-Light;
+	font-size: 15px;
+	color: white;
+}
+
+
+#element-detail-container .spec-value {
+	margin: 0;
+	margin-top: 3px;
+	font-family: Avenir-Light;
+	font-size: 12px;
 	color: white;
 }
 
