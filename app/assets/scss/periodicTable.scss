@@ -9,6 +9,8 @@ $polyatomic-nonmetal-color: #73e0d1;
 $metalloid-color: #A3E3C0;
 $noble-gas-color: #B373E0;
 $unknown-color: #b7b7b7;
+$lanthanide-color: white;
+$actinide-color: white;
 
 $element-detail-container-color: #17232C;
 $element-detail-container-width: 318px;
@@ -19,7 +21,7 @@ $element-detail-container-width: 318px;
 }
 
 #scroll-container.selected {
-	margin-right: $element-detail-container-width + 40px;
+	margin-right: $element-detail-container-width;
 }
 
 #table-container {
@@ -30,6 +32,8 @@ $element-detail-container-width: 318px;
 	transform: scale(0.8);
 	border-collapse: collapse;
 	display: inline-block;
+	transform-origin: 0 0;
+	margin: 47px;
 }
 
 .element {
@@ -109,6 +113,14 @@ $element-detail-container-width: 318px;
 
 .unknown {
 	color: $unknown-color;
+}
+
+.lanthanide {
+	color: $lanthanide-color;
+}
+
+.actinide {
+	color: $actinide-color;
 }
 
 #lantanos-cell p {

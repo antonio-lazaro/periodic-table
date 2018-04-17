@@ -69,8 +69,17 @@ export class PeriodicTable extends React.Component {
       }
     }
 
-    var lantanos = "";
-    var actinios = "";
+    // Lantanos
+    var lanthanides = [];
+    for (var i = 57; i <= 71; i++) {
+      lanthanides.push(<Element element={this.props.elements[i - 1]} atomicNumber={i} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} />);
+    }
+
+    // Actinios
+    var actinides = [];
+    for (var i = 89; i <= 103; i++) {
+      actinides.push(<Element element={this.props.elements[i - 1]} atomicNumber={i} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} />);
+    }
 
     return (
       <div id="scroll-container" className={(this.props.selected) ? "selected" : ""}>
@@ -98,11 +107,17 @@ export class PeriodicTable extends React.Component {
 
               <tr>{rowSeven}</tr>
 
-              <tr></tr>
+              <tr style={{ height: 55 }}></tr>
 
-              <tr></tr>
+              <tr>
+                <td colSpan="2"></td>
+                {lanthanides}
+              </tr>
 
-              <tr></tr>
+              <tr>
+                <td colSpan="2"></td>
+                {actinides}
+              </tr>
 
             </tbody>
           </table>
