@@ -197,3 +197,13 @@ $element-detail-container-width: 318px;
 	color: white;
 }
 
+#element-detail-shadow {
+	background: linear-gradient(to left, rgba(24,35,44,0.65) 0%,rgba(23,35,44,0) 100%);
+	position: fixed;
+	top: 0;
+	right: $element-detail-container-width + 70px;
+	bottom: 0;
+	width: 200px;
+	pointer-events: none;
+}
+

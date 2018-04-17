@@ -33,6 +33,7 @@ export class LearnPage extends React.Component {
         <button type="button" onClick={this.handleClick.bind(this)}>Start Quiz!</button>
         <div style={{ clear: 'both' }}></div>
         <PeriodicTable selectElement={this.selectElement.bind(this)} selected={(this.state.selectedElement) ? true : false}/>
+        {(this.state.selectedElement) ? <div id="element-detail-shadow"></div> : undefined}
         {(this.state.selectedElement) ? <ElementDetail element={this.state.selectedElement} selectElement={this.selectElement.bind(this)} /> : undefined}
       </div>
     );
