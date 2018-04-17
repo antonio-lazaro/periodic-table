@@ -1,6 +1,6 @@
-# RESCORM
+# Periodic Table
 
-RESCORM is a boilerplate for creating SCORM-compliant React applications.
+React app to learn the periodic table elements using RESCORM (boilerplate for creating SCORM-compliant React applications).
 
 
 # Features
