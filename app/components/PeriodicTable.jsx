@@ -16,25 +16,25 @@ export class PeriodicTable extends React.Component {
     // Row 2
     var rowTwo = [];
     for (var i = 3; i <= 10; i++) {
-      rowTwo.push(<Element element={this.props.elements[i - 1]} atomicNumber={i} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} />);
+      rowTwo.push(<Element element={this.props.elements[i - 1]} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} selected={(this.props.selectedElements.includes(this.props.elements[i - 1])) ? true : false } />);
     }
 
     // Row 3
     var rowThree = [];
     for (var i = 11; i <= 18; i++) {
-      rowThree.push(<Element element={this.props.elements[i - 1]} atomicNumber={i} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} />);
+      rowThree.push(<Element element={this.props.elements[i - 1]} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} selected={(this.props.selectedElements.includes(this.props.elements[i - 1])) ? true : false } />);
     }
 
     // Row 4
     var rowFour = [];
     for (var i = 19; i <= 36; i++) {
-      rowFour.push(<Element element={this.props.elements[i - 1]} atomicNumber={i} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} />);
+      rowFour.push(<Element element={this.props.elements[i - 1]} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} selected={(this.props.selectedElements.includes(this.props.elements[i - 1])) ? true : false } />);
     }
 
     // Row 5
     var rowFive = [];
     for (var i = 37; i <= 54; i++) {
-      rowFive.push(<Element element={this.props.elements[i - 1]} atomicNumber={i} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} />);
+      rowFive.push(<Element element={this.props.elements[i - 1]} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} selected={(this.props.selectedElements.includes(this.props.elements[i - 1])) ? true : false } />);
     }
 
     // Row 6
@@ -48,7 +48,7 @@ export class PeriodicTable extends React.Component {
               <p>Lantanos</p>
             </td>);
         } else {
-          rowSix.push(<Element element={this.props.elements[i - 1]} atomicNumber={i} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} />);
+          rowSix.push(<Element element={this.props.elements[i - 1]} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} selected={(this.props.selectedElements.includes(this.props.elements[i - 1])) ? true : false } />);
         }
       }
     }
@@ -64,7 +64,7 @@ export class PeriodicTable extends React.Component {
               <p>Actinios</p>
             </td>);
         } else {
-          rowSeven.push(<Element element={this.props.elements[i - 1]} atomicNumber={i} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} />);
+          rowSeven.push(<Element element={this.props.elements[i - 1]} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} selected={(this.props.selectedElements.includes(this.props.elements[i - 1])) ? true : false } />);
         }
       }
     }
@@ -72,27 +72,27 @@ export class PeriodicTable extends React.Component {
     // Lantanos
     var lanthanides = [];
     for (var i = 57; i <= 71; i++) {
-      lanthanides.push(<Element element={this.props.elements[i - 1]} atomicNumber={i} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} />);
+      lanthanides.push(<Element element={this.props.elements[i - 1]} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} selected={(this.props.selectedElements.includes(this.props.elements[i - 1])) ? true : false } />);
     }
 
     // Actinios
     var actinides = [];
     for (var i = 89; i <= 103; i++) {
-      actinides.push(<Element element={this.props.elements[i - 1]} atomicNumber={i} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} />);
+      actinides.push(<Element element={this.props.elements[i - 1]} key={this.props.elements[i - 1].name} selectElement={this.props.selectElement} selected={(this.props.selectedElements.includes(this.props.elements[i - 1])) ? true : false } />);
     }
 
     return (
-      <div id="scroll-container" className={(this.props.selected) ? "selected" : ""}>
+      <div id="scroll-container" className={(this.props.selectedElements.length > 0) ? "selected" : ""}>
         <div id="table-container">
           <table id="periodicTable">
             <tbody>
 
               <tr>
-                <Element element={this.props.elements[0]} atomicNumber={1} selectElement={this.props.selectElement} />
+                <Element element={this.props.elements[0]} selectElement={this.props.selectElement} selected={(this.props.selectedElements.includes(this.props.elements[0])) ? true : false } />
                 <td></td>
                 <td colSpan="10" rowSpan="3"></td>
                 <td colSpan="5"></td>
-                <Element element={this.props.elements[1]} atomicNumber={2} selectElement={this.props.selectElement} />
+                <Element element={this.props.elements[1]} selectElement={this.props.selectElement} selected={(this.props.selectedElements.includes(this.props.elements[1])) ? true : false } />
               </tr>
               
               <tr>{rowTwo}</tr>

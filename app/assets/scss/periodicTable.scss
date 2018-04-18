@@ -4,13 +4,15 @@ $diatomic-nonmetal-color: #23C4EA;
 $alkali-metal-color: #A3E3C0;
 $alkaline-earth-metal-color: #FFA973;
 $transition-metal-color: #fff;
-$post-transition-metal-color: #EAEAB6;
+$post-transition-metal-color: #ffffaf; // #EAEAB6;
 $polyatomic-nonmetal-color: #73e0d1;
 $metalloid-color: #A3E3C0;
 $noble-gas-color: #B373E0;
-$unknown-color: #b7b7b7;
-$lanthanide-color: white;
-$actinide-color: white;
+$unknown-color: #c0b0ff; // #b7b7b7;
+$lanthanide-color: #e2d6ff;
+$actinide-color: #f1b8ff;
+
+$learn-page-color: #1a262f;
 
 $element-detail-container-color: #17232C;
 $element-detail-container-width: 318px;
@@ -137,6 +139,59 @@ $element-detail-container-width: 318px;
 	font-size: 11px;
 	color: #ffffffc4;
 	user-select: none;
+}
+
+.element-selected {
+	background: white;
+	color: white;
+	border-radius: 2px;
+	border: none;
+}
+
+.element-selected.diatomic-nonmetal {
+	background: $diatomic-nonmetal-color;
+}
+
+.element-selected.alkali-metal {
+	background: $alkali-metal-color;
+}
+
+.element-selected.alkaline-earth-metal {
+	background: $alkaline-earth-metal-color;
+}
+
+.element-selected.transition-metal {
+	background: $transition-metal-color;
+	color: $learn-page-color;
+}
+
+.element-selected.post-transition-metal {
+	background: $post-transition-metal-color;
+	color: $learn-page-color;
+}
+
+.element-selected.polyatomic-nonmetal {
+	background: $polyatomic-nonmetal-color;
+}
+
+.element-selected.metalloid {
+	background: $metalloid-color;
+}
+
+.element-selected.noble-gas {
+	background: $noble-gas-color;
+}
+
+.element-selected.unknown {
+	background: $unknown-color;
+}
+
+.element-selected.lanthanide {
+	background: $lanthanide-color;
+}
+
+.element-selected.actinide {
+	background: $actinide-color;
 }
 
 /* Element Detail */

@@ -41,13 +41,15 @@ export default class OCQuestion extends React.Component {
   onAnswerQuestion() {
     // Send data via SCORM
     let objective = this.props.objective;
-    let scorePercentage = null;
-    if (this.state.answered && this.state.checkedPosition && this.state.checkedPosition == this.state.randomPosition) {
-      scorePercentage = 100 / this.props.quizLength;
+    let scorePercentage = 0;
+
+    if (this.state.checkedPosition && this.state.checkedPosition == this.state.randomPosition) {
+      scorePercentage = 1;
     } else {
       scorePercentage = 0;
     }
-    this.props.dispatch(objectiveAccomplished(objective.id, objective.score + scorePercentage));
+
+    this.props.dispatch(objectiveAccomplished(objective.id, scorePercentage));
 
     // Mark question as answered
     this.setState({answered:true});
@@ -82,7 +84,6 @@ export default class OCQuestion extends React.Component {
     // question = this.props.question.question.replace(/__atomicNumber__/g, elements.indexOf(this.state.askedElement) + 1);
 
     let question = this.props.I18n.getTransWithParams(this.props.question.question, this.state.askedElement);
-    console.log(this.state.askedElement);
 
     let choices = [];
     let j = 0;

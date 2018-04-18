@@ -2,6 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import './../assets/scss/main.scss';
 
+import * as I18n from '../vendors/I18n.js';
+import { GLOBAL_CONFIG } from '../config/config.js';
+
+import SCORM from './SCORM.jsx';
 import LearnPage from './LearnPage.jsx';
 import QuizPage from './QuizPage.jsx';
 
@@ -10,6 +14,7 @@ import { PAGES } from '../constants/constants.jsx';
 export class App extends React.Component {
   constructor(props) {
     super(props);
+    I18n.init();
   }
 
   render() {
@@ -17,17 +22,18 @@ export class App extends React.Component {
 
     switch (this.props.page) {
       case PAGES.LEARN_PAGE:
-        appContent = (<LearnPage />);
+        appContent = (<LearnPage I18n={I18n} />);
         break;
       case PAGES.QUIZ_PAGE:
-        appContent = (<QuizPage />);
+        appContent = (<QuizPage I18n={I18n} />);
         break;
       default:
-        appContent = (<LearnPage />);
+        appContent = (<LearnPage I18n={I18n} />);
     }
 
     return (
       <div id="container">
+        <SCORM dispatch={this.props.dispatch} tracking={this.props.tracking} config={GLOBAL_CONFIG}/>
         {appContent}
       </div>
     );
@@ -35,9 +41,7 @@ export class App extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return {
-    page: state.page
-  };
+  return state;
 }
 
 export default connect(mapStateToProps)(App);

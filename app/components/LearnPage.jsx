@@ -32,7 +32,7 @@ export class LearnPage extends React.Component {
         <p id="learn-page-title">Periodic Table of Elements</p>
         <button type="button" onClick={this.handleClick.bind(this)}>Start Quiz!</button>
         <div style={{ clear: 'both' }}></div>
-        <PeriodicTable selectElement={this.selectElement.bind(this)} selected={(this.state.selectedElement) ? true : false}/>
+        <PeriodicTable selectElement={this.selectElement.bind(this)} selectedElements={(this.state.selectedElement) ? [this.state.selectedElement] : []}/>
         {(this.state.selectedElement) ? <div id="element-detail-shadow"></div> : undefined}
         {(this.state.selectedElement) ? <ElementDetail element={this.state.selectedElement} selectElement={this.selectElement.bind(this)} /> : undefined}
       </div>

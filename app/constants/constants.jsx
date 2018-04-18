@@ -13,7 +13,7 @@ export const INITIAL_STATE = {
   },
   wait_for_user_profile: false,
 
-  page: 'QUIZ_PAGE',
+  page: 'LEARN_PAGE',
   learnPage: {
     selectedElement: undefined
   },
