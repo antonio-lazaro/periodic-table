@@ -1,7 +1,7 @@
 import React from 'react';
 import './../assets/scss/finish_screen.scss';
 
-import { changePage } from '../reducers/actions.jsx';
+import { changePage, resetObjectives, finishApp } from '../reducers/actions.jsx';
 
 import { PAGES } from '../constants/constants.jsx';
 
@@ -12,6 +12,13 @@ export default class FinishScreen extends React.Component {
 
   handleClick() {
     this.props.dispatch(changePage(PAGES.LEARN_PAGE));
+    this.props.dispatch(resetObjectives());
+    this.props.dispatch(finishApp(false));
+  }
+
+  handleReset() {
+    this.props.dispatch(resetObjectives());
+    this.props.dispatch(finishApp(false));
   }
 
   _getFinishScreenTitle(progress_measure, score){
@@ -36,6 +43,7 @@ export default class FinishScreen extends React.Component {
       <div className="finish_screen">
         <p id="finish_title">{finishTitleText}</p>
         <button type="button" onClick={this.handleClick.bind(this)}>Go to Periodic Table!</button>
+        <button type="button" onClick={this.handleReset.bind(this)}>Reset Quiz!</button>
       </div>
     );
   }
