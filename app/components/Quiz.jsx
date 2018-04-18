@@ -7,6 +7,7 @@ import {addObjectives, resetObjectives, finishApp} from './../reducers/actions';
 import QuizHeader from './QuizHeader.jsx';
 import OCQuestion from './OCQuestion.jsx';
 import MCQuestion from './MCQuestion.jsx';
+import PTOCQuestion from './PTOCQuestion.jsx';
 
 import { ANSWER_TYPES } from '../constants/constants.jsx';
 
@@ -85,6 +86,9 @@ export default class Quiz extends React.Component {
         break;
       case ANSWER_TYPES.SELECT_MULTIPLE_ANSWER:
         currentQuestionRender = (<MCQuestion quizLength={this.state.quiz.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished}/>);
+        break;
+      case ANSWER_TYPES.PT_SELECT_ONE_ANSWER:
+        currentQuestionRender = (<PTOCQuestion quizLength={this.state.quiz.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished}/>);
         break;
       default:
         currentQuestionRender = "Question type not supported";

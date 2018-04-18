@@ -269,3 +269,28 @@ $element-detail-container-width: 318px;
 	pointer-events: none;
 }
 
+/* Element quiz */
+
+.question #periodicTable {
+	margin: 0;
+}
+
+.question .element {
+	color: white;
+	border-color: #253746;
+}
+
+.question .element.element-selected {
+	color: $learn-page-color;
+}
+
+.element.element-selected.choice-correct, .element.choice-correct {
+	background: #04C678;
+	color: white;
+}
+
+.element.element-selected.choice-incorrect {
+	background: #FF5555;
+	color: white;
+}
+
