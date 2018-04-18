@@ -386,7 +386,7 @@ export const QUIZ = {
     question: "¿Cuál es el número atómico del #{name}?",
     answerField: "number",
     answerType: "SELECT_ONE_ANSWER",
-    "difficulty": 5
+    "difficulty": 9
   }, {
     question: "Selecciona la posición del #{name}",
     answerField: "number",
@@ -396,7 +396,7 @@ export const QUIZ = {
     question: "¿Cuál de los siguientes elementos tiene número atómico #{number}?",
     answerField: "name",
     answerType: "SELECT_ONE_ANSWER",
-    "difficulty": 5
+    "difficulty": 9
   }, {
     question: "Selecciona los elementos del grupo #{category}",
     answerField: "name",

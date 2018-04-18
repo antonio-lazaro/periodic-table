@@ -1,7 +1,9 @@
 /* Quiz header */
 
 div.quizHeader {
-  display: inline-flex;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   margin-top: 12px;
 }
 
@@ -17,7 +19,7 @@ div.quizHeader {
   border-radius: 100px;
   overflow: hidden;
   margin-right: 30px;
-  margin-top: 14px;
+  margin-top: 3px;
 }
 
 #progress-bar-progress {
