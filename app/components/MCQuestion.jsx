@@ -20,7 +20,7 @@ export default class MCQuestion extends React.Component {
       return element[this.props.question.askedField] == randomElement[this.props.question.askedField]
     });
 
-    // Filter all correct answers
+    // Filter all incorrect answers
     let incorrectAnswers = elements.filter((element) => {
       return element[this.props.question.askedField] != randomElement[this.props.question.askedField]
     })

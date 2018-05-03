@@ -407,6 +407,7 @@ export const QUIZ = {
   }, {
     question: "Selecciona los elementos del grupo #{category}",
     answerField: "name",
+    askedField: "category",
     answerType: "PT_SELECT_MULTIPLE_ANSWER",
     showElements: true,
     "difficulty": 7
