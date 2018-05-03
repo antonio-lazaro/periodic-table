@@ -49,6 +49,31 @@ div.header_wrapper img {
   color: #fff;
   margin-bottom: 0;
   float: left;
+
+  /* width < 414px */
+  @media only screen 
+  and (max-device-width : 414px) {
+    margin: 23px;
+    margin-bottom: 8px;
+  }
+
+  /* iPhone SE portrait */
+  @media only screen 
+  and (min-device-width : 320px) 
+  and (max-device-width : 568px) 
+  and (orientation : portrait) {
+    //font-size: 27px;
+  }
+
+  /* iPhone SE landscape */
+  @media only screen 
+  and (min-device-width : 320px) 
+  and (max-device-width : 568px) 
+  and (orientation : landscape) {
+    font-size: 27px;
+    margin: 23px;
+    margin-bottom: 8px;
+  }
 }
 
 #learn-page button {
@@ -65,6 +90,20 @@ div.header_wrapper img {
   transform: scale(0.7);
   outline: none;
   cursor: pointer;
+
+  /* width < 414px */
+  @media only screen 
+  and (max-device-width : 414px) {
+    margin: 0;
+  }
+
+  /* iPhone SE landscape */
+  @media only screen 
+  and (min-device-width : 320px) 
+  and (max-device-width : 568px) 
+  and (orientation : landscape) {
+    margin: 0;
+  }
 }
 
 #learn-page button:hover {

@@ -373,6 +373,12 @@ export const QUIZ = {
     answerType: "SELECT_ONE_ANSWER",
     "difficulty": 2
   }, {
+    question: "¿Cuales de los siguientes elementos son #{category}?",
+    answerField: "name",
+    askedField: "category",
+    answerType: "SELECT_MULTIPLE_ANSWER",
+    "difficulty": 4
+  }, {
     question: "¿Cuál es el símbolo que corresponde al #{name}?",
     answerField: "symbol",
     answerType: "SELECT_ONE_ANSWER",

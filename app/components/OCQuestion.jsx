@@ -15,10 +15,14 @@ export default class OCQuestion extends React.Component {
     let askedElement = elements[Math.floor(Math.random() * elements.length)];
     let randomPosition = Math.floor(Math.random() * 4);
 
+    let incorrectAnswers = elements.filter((element) => {
+      return element[this.props.question.answerField] != askedElement[this.props.question.answerField]
+    })
+
     let randomElements = [];
 
     for(let i = 0; i < 4; i++) {
-      let randomElement = elements[Math.floor(Math.random() * elements.length)];
+      let randomElement = incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
       randomElements.push(randomElement);
     }
 
