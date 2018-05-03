@@ -397,6 +397,7 @@ export const QUIZ = {
     question: "Selecciona la posición del #{name}",
     answerField: "number",
     answerType: "PT_SELECT_ONE_ANSWER",
+    showElements: false,
     "difficulty": 4
   }, {
     question: "¿Cuál de los siguientes elementos tiene número atómico #{number}?",
@@ -406,12 +407,8 @@ export const QUIZ = {
   }, {
     question: "Selecciona los elementos del grupo #{category}",
     answerField: "name",
-    answerType: "PT_SELECT_ANSWER",
+    answerType: "PT_SELECT_MULTIPLE_ANSWER",
+    showElements: true,
     "difficulty": 7
-  }, {
-    question: "¿?",
-    answerField: "name",
-    answerType: "PT_SELECT_ANSWER",
-    "difficulty": 9
   }]
 };

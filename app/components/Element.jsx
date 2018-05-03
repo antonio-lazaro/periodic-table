@@ -29,12 +29,17 @@ export default class Element extends React.Component {
       let correct = (this.props.answered && this.props.correct) ? " " + correctClass : ((this.props.answered) ? " " + incorrectClass : "");
       classes += correct;
     }
+
+    let show = true;
+    if (typeof this.props.show !== "undefined" && !this.props.answered) {
+      show = this.props.show;
+    }
     return (
       <td className={"element " + classes} onClick={this.handleClick}>
         <div className="element-container">
-          <p className="element-atomic-number">{this.props.element.number}</p>
-          <p className="element-symbol">{this.props.element.symbol}</p>
-          <p className="element-name">{this.props.element.name}</p>
+          <p className="element-atomic-number">{(show) ? this.props.element.number : ""}</p>
+          <p className="element-symbol">{(show) ? this.props.element.symbol : ""}</p>
+          <p className="element-name">{(show) ? this.props.element.name : ""}</p>
         </div>
       </td>
     );
