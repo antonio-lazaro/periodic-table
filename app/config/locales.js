@@ -1,5 +1,7 @@
 export let LOCALES = {
   en:{
+    "i.learn_page_title":"Periodic Table of Elements",
+    "i.start_quiz_text":"Start Quiz!",
     "i.answer":"Answer",
     "i.difficulty":"Difficulty",
     "i.finish_quiz":"Finish quiz",
@@ -15,8 +17,19 @@ export let LOCALES = {
     "i.reset_quiz":"Reset",
     "i.score":"Score",
     "i.title":"Periodic",
+    "i.atomic_number":"atomic number",
+    "i.atomic_mass": "atomic mass",
+    "i.group": "group",
+    "i.density":"density",
+    "i.discovered_by":"discovered by",
+    "i.molar_heat":"molar heat",
+    "i.state":"state (A.T.)",
+    "i.lanthanides": "Lanthanides",
+    "i.actinides": "Actinides"
   },
   es:{
+    "i.learn_page_title":"Tabla Periódica",
+    "i.start_quiz_text":"Empezar Quiz!",
     "i.answer":"Responder",
     "i.difficulty":"Dificultad",
     "i.finish_quiz":"Finalizar cuestionario",
@@ -31,5 +44,14 @@ export let LOCALES = {
     "i.reset_question":"Resetear",
     "i.reset_quiz":"Resetear cuestionario",
     "i.score":"Puntuación",
+    "i.atomic_number":"número atómico",
+    "i.atomic_mass": "masa atómica",
+    "i.group": "grupo",
+    "i.density":"densidad",
+    "i.discovered_by":"descubierto por",
+    "i.molar_heat": "masa molar",
+    "i.state":"estado (T.A.)",
+    "i.lanthanides": "Lantanos",
+    "i.actinides": "Actinios"
   },
 };

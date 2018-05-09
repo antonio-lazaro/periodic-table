@@ -29,12 +29,12 @@ export class LearnPage extends React.Component {
   render() {
     return (
       <div id="learn-page">
-        <p id="learn-page-title">Periodic Table of Elements</p>
-        <button type="button" onClick={this.handleClick.bind(this)}>Start Quiz!</button>
+        <p id="learn-page-title">{this.props.I18n.getTrans("i.learn_page_title")}</p>
+        <button type="button" onClick={this.handleClick.bind(this)}>{this.props.I18n.getTrans("i.start_quiz_text")}</button>
         <div style={{ clear: 'both' }}></div>
-        <PeriodicTable selectElement={this.selectElement.bind(this)} selectedElements={(this.state.selectedElement) ? [this.state.selectedElement] : []}/>
+        <PeriodicTable selectElement={this.selectElement.bind(this)} selectedElements={(this.state.selectedElement) ? [this.state.selectedElement] : []} I18n={this.props.I18n} />
         {(this.state.selectedElement) ? <div id="element-detail-shadow"></div> : undefined}
-        {(this.state.selectedElement) ? <ElementDetail element={this.state.selectedElement} selectElement={this.selectElement.bind(this)} /> : undefined}
+        {(this.state.selectedElement) ? <ElementDetail element={this.state.selectedElement} selectElement={this.selectElement.bind(this)} I18n={this.props.I18n} /> : undefined}
       </div>
     );
   }

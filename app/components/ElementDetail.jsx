@@ -25,23 +25,31 @@ export default class ElementDetail extends React.Component {
         <p className="name">{this.props.element.name}</p>
         <p className="description">{this.props.element.summary}</p>
         <div className="spec-box first">
-          <p className="spec-title">atomic number</p>
+          <p className="spec-title">{this.props.I18n.getTrans("i.atomic_number")}</p>
           <p className="spec-value">{this.props.element.number}</p>
         </div>
         <div className="spec-box">
-          <p className="spec-title">atomic mass</p>
-          <p className="spec-value">{this.props.element.atomic_mass}</p>
-        </div>
-        <div className="spec-box">
-          <p className="spec-title">group</p>
+          <p className="spec-title">{this.props.I18n.getTrans("i.group")}</p>
           <p className="spec-value">{this.props.element.category}</p>
         </div>
         <div className="spec-box">
-          <p className="spec-title">density</p>
-          <p className="spec-value">{this.props.element.density}</p>
+          <p className="spec-title">{this.props.I18n.getTrans("i.atomic_mass")}</p>
+          <p className="spec-value">{this.props.element.atomic_mass} <span className="spec-measure">u</span></p>
         </div>
         <div className="spec-box">
-          <p className="spec-title">discovered by</p>
+          <p className="spec-title">{this.props.I18n.getTrans("i.molar_heat")}</p>
+          <p className="spec-value">{this.props.element.molar_heat} <span className="spec-measure">g/mol</span></p>
+        </div>
+        <div className="spec-box">
+          <p className="spec-title">{this.props.I18n.getTrans("i.density")}</p>
+          <p className="spec-value">{this.props.element.density * 1000} <span className="spec-measure">kg/m³</span></p>
+        </div>
+        <div className="spec-box">
+          <p className="spec-title">{this.props.I18n.getTrans("i.state")}</p>
+          <p className="spec-value">{this.props.element.phase}</p>
+        </div>
+        <div className="spec-box">
+          <p className="spec-title">{this.props.I18n.getTrans("i.discovered_by")}</p>
           <p className="spec-value">{this.props.element.discovered_by}</p>
         </div>
       </div>

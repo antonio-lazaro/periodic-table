@@ -6,17 +6,21 @@ import {objectiveAccomplished, objectiveAccomplishedThunk} from './../reducers/a
 import PeriodicTable from './PeriodicTable.jsx';
 import QuestionButtons from './QuestionButtons.jsx';
 
-import { elements } from '../constants/PeriodicTableJSON.json';
+import { elements as elementsEN } from '../constants/PeriodicTableJSON.json';
+import { elements as elementsES } from '../constants/PeriodicTableJSON.es.json';
 
 export default class PTMCQuestion extends React.Component {
   constructor(props){
     super(props);
 
+    // Language
+    this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
+
     // Select a random element
-    let randomElement = elements[Math.floor(Math.random() * elements.length)];
+    let randomElement = this.elements[Math.floor(Math.random() * this.elements.length)];
 
     // Filter all correct answers
-    let correctAnswers = elements.filter((element) => {
+    let correctAnswers = this.elements.filter((element) => {
       return element[this.props.question.askedField] == randomElement[this.props.question.askedField]
     });
 
@@ -72,7 +76,7 @@ export default class PTMCQuestion extends React.Component {
     this.props.onNextQuestion();
 
     this.setState({
-      randomElement:  elements[Math.floor(Math.random() * elements.length)],
+      randomElement:  this.elements[Math.floor(Math.random() * this.elements.length)],
       selectedElements: [],
       answered: false
     });
@@ -83,7 +87,7 @@ export default class PTMCQuestion extends React.Component {
     return (
       <div className="question">
         <p className="title">{question}</p>
-        <PeriodicTable selectElement={this.selectElement.bind(this)} selectedElements={this.state.selectedElements} askedElements={this.state.correctAnswers} answered={this.state.answered} showElements={this.props.question.showElements}/>
+        <PeriodicTable selectElement={this.selectElement.bind(this)} selectedElements={this.state.selectedElements} askedElements={this.state.correctAnswers} answered={this.state.answered} showElements={this.props.question.showElements} I18n={this.props.I18n} />
         <QuestionButtons I18n={this.props.I18n} onAnswerQuestion={this.onAnswerQuestion.bind(this)} onResetQuestion={this.onResetQuestion.bind(this)} onResetQuiz={this.props.onResetQuiz} onNextQuestion={this.onNextQuestion.bind(this)} answered={this.state.answered} quizCompleted={this.props.quizCompleted} allow_finish={this.props.isLastQuestion}/>
       </div>
     );

@@ -7,13 +7,17 @@ import PeriodicTable from './PeriodicTable.jsx';
 import OCQuestionChoice from './OCQuestionChoice.jsx';
 import QuestionButtons from './QuestionButtons.jsx';
 
-import { elements } from '../constants/PeriodicTableJSON.json';
+import { elements as elementsEN } from '../constants/PeriodicTableJSON.json';
+import { elements as elementsES } from '../constants/PeriodicTableJSON.es.json';
 
 export default class PTOCQuestion extends React.Component {
   constructor(props){
     super(props);
 
-    let askedElement = elements[Math.floor(Math.random() * elements.length)];
+    // Language
+    this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
+
+    let askedElement = this.elements[Math.floor(Math.random() * this.elements.length)];
 
     this.state = {
       answered: false,
@@ -52,7 +56,7 @@ export default class PTOCQuestion extends React.Component {
     this.props.onNextQuestion();
 
     this.setState({
-      askedElement:  elements[Math.floor(Math.random() * elements.length)],
+      askedElement:  this.elements[Math.floor(Math.random() * this.elements.length)],
       selectedElement: undefined,
     });
   }
@@ -62,7 +66,7 @@ export default class PTOCQuestion extends React.Component {
     return (
       <div className="question">
         <p className="title">{question}</p>
-        <PeriodicTable selectElement={this.selectElement.bind(this)} selectedElements={(this.state.selectedElement) ? [this.state.selectedElement] : []} askedElements={[this.state.askedElement]} answered={this.state.answered} showElements={this.props.question.showElements}/>
+        <PeriodicTable selectElement={this.selectElement.bind(this)} selectedElements={(this.state.selectedElement) ? [this.state.selectedElement] : []} askedElements={[this.state.askedElement]} answered={this.state.answered} showElements={this.props.question.showElements} I18n={this.props.I18n} />
         <QuestionButtons I18n={this.props.I18n} onAnswerQuestion={this.onAnswerQuestion.bind(this)} onResetQuestion={this.onResetQuestion.bind(this)} onResetQuiz={this.props.onResetQuiz} onNextQuestion={this.onNextQuestion.bind(this)} answered={this.state.answered} quizCompleted={this.props.quizCompleted} allow_finish={this.props.isLastQuestion}/>
       </div>
     );

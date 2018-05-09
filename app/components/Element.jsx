@@ -1,6 +1,8 @@
 import React from 'react';
 import './../assets/scss/periodicTable.scss';
 
+import { ELEMENT_GROUPS } from '../constants/constants';
+
 export default class Element extends React.Component {
   constructor(props) {
     super(props);
@@ -17,7 +19,7 @@ export default class Element extends React.Component {
 
     if (typeof this.props.answered === "undefined") {
       let group = this.props.element.category.replace(/ /g, "-").split(",")[0];
-      classes += " " + group;
+      classes += " " + ELEMENT_GROUPS[group];
     }
 
     let selectedClass = "element-selected";

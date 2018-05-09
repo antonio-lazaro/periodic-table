@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import './../assets/scss/periodicTable.scss';
 
 import ELEMENTS from '../constants/constants';
-import { elements } from '../constants/PeriodicTableJSON.json';
+import { elements as elementsEN } from '../constants/PeriodicTableJSON.json';
+import { elements as elementsES } from '../constants/PeriodicTableJSON.es.json';
 import { PAGES } from '../constants/constants.jsx';
 
 import Element from './Element.jsx';
@@ -11,17 +12,19 @@ import Element from './Element.jsx';
 export class PeriodicTable extends React.Component {
   constructor(props) {
     super(props);
+
+    this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
   }
 
   getElementComponent(i) {
     return (
       <Element
-        element={this.props.elements[i - 1]}
-        key={this.props.elements[i - 1].name}
+        element={this.elements[i - 1]}
+        key={this.elements[i - 1].name}
         selectElement={this.props.selectElement}
-        selected={(this.props.selectedElements.includes(this.props.elements[i - 1])) ? true : false }
+        selected={(this.props.selectedElements.includes(this.elements[i - 1])) ? true : false }
         answered={this.props.answered}
-        correct={(this.props.askedElements && this.props.askedElements.includes(this.props.elements[i - 1])) ? true : false }
+        correct={(this.props.askedElements && this.props.askedElements.includes(this.elements[i - 1])) ? true : false }
         show={this.props.showElements}
         />
     );
@@ -60,7 +63,7 @@ export class PeriodicTable extends React.Component {
           rowSix.push(
             <td key={'lantanos'} id="lantanos-cell">
               <p>57-71</p>
-              <p>Lantanos</p>
+              <p>{this.props.I18n.getTrans("i.lanthanides")}</p>
             </td>);
         } else {
           rowSix.push(this.getElementComponent(i));
@@ -76,7 +79,7 @@ export class PeriodicTable extends React.Component {
           rowSeven.push(
             <td key={'actinios'} id="actinios-cell">
               <p>89-103</p>
-              <p>Actinios</p>
+              <p>{this.props.I18n.getTrans("i.actinides")}</p>
             </td>);
         } else {
           rowSeven.push(this.getElementComponent(i));
@@ -144,7 +147,6 @@ export class PeriodicTable extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    elements: elements,
     page: state.page
   };
 }

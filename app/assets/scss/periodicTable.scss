@@ -319,12 +319,16 @@ $element-detail-container-width: 318px;
 	color: rgba(255,255,255,0.61);
 }
 
-
 #element-detail-container .spec-value {
 	margin: 0;
 	font-family: Avenir-Light;
 	font-size: 15px;
 	color: rgba(255,255,255,0.9);
+}
+
+#element-detail-container .spec-measure {
+	font-size: 10px;
+	opacity: 0.6;
 }
 
 #element-detail-shadow {

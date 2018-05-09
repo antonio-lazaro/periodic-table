@@ -6,22 +6,26 @@ import {objectiveAccomplished, objectiveAccomplishedThunk} from './../reducers/a
 import MCQuestionChoice from './MCQuestionChoice.jsx';
 import QuestionButtons from './QuestionButtons.jsx';
 
-import { elements } from '../constants/PeriodicTableJSON.json';
+import { elements as elementsEN } from '../constants/PeriodicTableJSON.json';
+import { elements as elementsES } from '../constants/PeriodicTableJSON.es.json';
 
 export default class MCQuestion extends React.Component {
   constructor(props) {
     super(props);
 
+    // Language
+    this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
+
     // Select a random element
-    let randomElement = elements[Math.floor(Math.random() * elements.length)];
+    let randomElement = this.elements[Math.floor(Math.random() * this.elements.length)];
 
     // Filter all correct answers
-    let correctAnswers = elements.filter((element) => {
+    let correctAnswers = this.elements.filter((element) => {
       return element[this.props.question.askedField] == randomElement[this.props.question.askedField]
     });
 
     // Filter all incorrect answers
-    let incorrectAnswers = elements.filter((element) => {
+    let incorrectAnswers = this.elements.filter((element) => {
       return element[this.props.question.askedField] != randomElement[this.props.question.askedField]
     })
 
@@ -99,15 +103,15 @@ export default class MCQuestion extends React.Component {
   onNextQuestion() {
     this.props.onNextQuestion();
     // Select a random element
-    let randomElement = elements[Math.floor(Math.random() * elements.length)];
+    let randomElement = this.elements[Math.floor(Math.random() * this.elements.length)];
 
     // Filter all correct answers
-    let correctAnswers = elements.filter((element) => {
+    let correctAnswers = this.elements.filter((element) => {
       return element[this.props.question.askedField] == randomElement[this.props.question.askedField]
     });
 
     // Filter all correct answers
-    let incorrectAnswers = elements.filter((element) => {
+    let incorrectAnswers = this.elements.filter((element) => {
       return element[this.props.question.askedField] != randomElement[this.props.question.askedField]
     })
 

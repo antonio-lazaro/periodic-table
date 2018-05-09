@@ -9,11 +9,15 @@ import Header from './Header.jsx';
 import FinishScreen from './FinishScreen.jsx';
 import Quiz from './Quiz.jsx';
 
-import { QUIZ } from '../constants/constants.jsx';
+import { QUIZ_EN } from '../constants/constants.jsx';
+import { QUIZ_ES } from '../constants/constants.jsx';
 
 export class QuizPage extends React.Component {
   constructor(props) {
     super(props);
+
+    // Language
+    this.quiz = (this.props.I18n.getLanguage() == 'es') ? QUIZ_ES : QUIZ_EN;
   }
 
   render() {
@@ -26,12 +30,12 @@ export class QuizPage extends React.Component {
       );
       if(this.props.wait_for_user_profile !== true){
         appContent = (
-          <Quiz dispatch={this.props.dispatch} user_profile={this.props.user_profile} tracking={this.props.tracking} quiz={QUIZ} config={GLOBAL_CONFIG} I18n={this.props.I18n}/>
+          <Quiz dispatch={this.props.dispatch} user_profile={this.props.user_profile} tracking={this.props.tracking} quiz={this.quiz} config={GLOBAL_CONFIG} I18n={this.props.I18n}/>
         );
       }
     } else {
       appContent = (
-        <FinishScreen dispatch={this.props.dispatch} user_profile={this.props.user_profile} tracking={this.props.tracking} quiz={QUIZ} config={GLOBAL_CONFIG} I18n={this.props.I18n}/>
+        <FinishScreen dispatch={this.props.dispatch} user_profile={this.props.user_profile} tracking={this.props.tracking} quiz={this.quiz} config={GLOBAL_CONFIG} I18n={this.props.I18n}/>
       );
     }
 
