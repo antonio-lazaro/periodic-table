@@ -9,6 +9,7 @@ import OCQuestion from './OCQuestion.jsx';
 import MCQuestion from './MCQuestion.jsx';
 import PTOCQuestion from './PTOCQuestion.jsx';
 import PTMCQuestion from './PTMCQuestion.jsx';
+import OCCompareQuestion from './OCCompareQuestion.jsx';
 
 import { ANSWER_TYPES } from '../constants/constants.jsx';
 
@@ -93,6 +94,9 @@ export default class Quiz extends React.Component {
         break;
       case ANSWER_TYPES.PT_SELECT_MULTIPLE_ANSWER:
         currentQuestionRender = (<PTMCQuestion quizLength={this.state.quiz.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished}/>);
+        break;
+      case ANSWER_TYPES.SELECT_ONE_ANSWER_COMPARE:
+        currentQuestionRender = (<OCCompareQuestion quizLength={this.state.quiz.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished}/>);
         break;
       default:
         currentQuestionRender = "Question type not supported";

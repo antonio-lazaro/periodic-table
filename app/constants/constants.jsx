@@ -383,7 +383,8 @@ export const ANSWER_TYPES = {
   SELECT_ONE_ANSWER: 'SELECT_ONE_ANSWER',
   SELECT_MULTIPLE_ANSWER: 'SELECT_MULTIPLE_ANSWER',
   PT_SELECT_ONE_ANSWER: 'PT_SELECT_ONE_ANSWER',
-  PT_SELECT_MULTIPLE_ANSWER: 'PT_SELECT_MULTIPLE_ANSWER'
+  PT_SELECT_MULTIPLE_ANSWER: 'PT_SELECT_MULTIPLE_ANSWER',
+  SELECT_ONE_ANSWER_COMPARE: 'SELECT_ONE_ANSWER_COMPARE'
 };
 
 export const QUIZ_EN = {
@@ -393,7 +394,7 @@ export const QUIZ_EN = {
     answerType: "SELECT_ONE_ANSWER",
     "difficulty": 2
   }, {
-    question: "Which of the following elements are #{category}?",
+    question: "What elements are #{category}?",
     answerField: "name",
     askedField: "category",
     answerType: "SELECT_MULTIPLE_ANSWER",
@@ -409,16 +410,37 @@ export const QUIZ_EN = {
     answerType: "SELECT_ONE_ANSWER",
     "difficulty": 4
   }, {
+    question: "Which element belongs to the same category as #{name}?",
+    comparedField: "category",
+    answerField: "name",
+    condition: '=',
+    answerType: "SELECT_ONE_ANSWER_COMPARE",
+    "difficulty": 5
+  }, {
     question: "How many protons does #{name} have?",
     answerField: "number",
     answerType: "SELECT_ONE_ANSWER",
     "difficulty": 9
+  }, {
+    question: "Which of the following elements has the highest atomic number?",
+    comparedField: "atomicNumber",
+    answerField: "name",
+    condition: '>',
+    answerType: "SELECT_ONE_ANSWER_COMPARE",
+    "difficulty": 5
   }, {
     question: "Select #{name}",
     answerField: "number",
     answerType: "PT_SELECT_ONE_ANSWER",
     showElements: false,
     "difficulty": 4
+  }, {
+    question: "Which of the following elements has the highest density?",
+    comparedField: "density",
+    answerField: "name",
+    condition: '>',
+    answerType: "SELECT_ONE_ANSWER_COMPARE",
+    "difficulty": 8
   }, {
     question: "Which of the following elements has #{number} protons?",
     answerField: "name",
