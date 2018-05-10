@@ -2,6 +2,8 @@
 
 React app to learn the periodic table of elements using RESCORM (boilerplate for creating SCORM-compliant React applications).
 
+![alt text](https://github.com/antonio-lazaro/periodic-table/tree/master/app/assets/images/periodic-table.png)
+
 
 # Features
 
