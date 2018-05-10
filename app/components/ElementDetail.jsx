@@ -42,7 +42,7 @@ export default class ElementDetail extends React.Component {
         </div>
         <div className="spec-box">
           <p className="spec-title">{this.props.I18n.getTrans("i.density")}</p>
-          <p className="spec-value">{this.props.element.density * 1000} <span className="spec-measure">kg/m³</span></p>
+          <p className="spec-value">{this.props.element.density} <span className="spec-measure">g/cm³</span></p>
         </div>
         <div className="spec-box">
           <p className="spec-title">{this.props.I18n.getTrans("i.state")}</p>

@@ -57,7 +57,7 @@ export default class OCQuestion extends React.Component {
       scorePercentage = 0;
     }
 
-    this.props.dispatch(objectiveAccomplished(objective.id, scorePercentage));
+    this.props.dispatch(objectiveAccomplished(objective.id, objective.score * scorePercentage));
 
     // Mark question as answered
     this.setState({answered:true});

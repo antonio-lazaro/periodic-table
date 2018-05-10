@@ -87,7 +87,18 @@ export default class MCQuestion extends React.Component {
         incorrectAnswers += 1;
       }
     }
-    let scorePercentage = Math.max(0, (correctAnswers - incorrectAnswers) / this.state.askedElements.length);
+
+    let scorePercentage;
+
+    if (this.state.askedElements.length > 0) {
+      scorePercentage = Math.max(0, (correctAnswers - incorrectAnswers) / this.state.askedElements.length);
+    } else {
+      if (incorrectAnswers > 0) {
+        scorePercentage = 0;
+      } else {
+        scorePercentage = 1;
+      }
+    }
 
     // Send data via SCORM
     let objective = this.props.objective;
