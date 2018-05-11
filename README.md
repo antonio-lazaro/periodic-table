@@ -4,6 +4,7 @@ React app to learn the periodic table of elements using RESCORM (boilerplate for
 
 ![](https://raw.githubusercontent.com/antonio-lazaro/periodic-table/master/app/assets/images/periodic-table.png)
 
+[Go to page](https://antonio-lazaro.github.io/periodic-table/)
 
 # Features
 
