@@ -45,7 +45,7 @@ export default class MCQuestion extends React.Component {
     }
 
     let randomElements = [];
-    for(let i = 0; i < 4 - numberOfCorrectAnswers; i++) {
+    for(let i = 0; i < 4; i++) {
       let randomElement = incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
       randomElements.push(randomElement);
     }
@@ -142,7 +142,7 @@ export default class MCQuestion extends React.Component {
     }
 
     let randomElements = [];
-    for(let i = 0; i < 4 - numberOfCorrectAnswers; i++) {
+    for(let i = 0; i < 4; i++) {
       let randomElement = incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
       randomElements.push(randomElement);
     }

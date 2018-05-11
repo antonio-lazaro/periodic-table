@@ -24,7 +24,7 @@ export let GLOBAL_CONFIG = {
       completion_threshold:0.5,
       score_threshold:0.6,
     },
-    n:undefined,
+    n: 5,
   },
 };
 
