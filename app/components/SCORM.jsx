@@ -1,6 +1,7 @@
 import React from 'react';
 import * as SCORM_WRAPPER from '../vendors/SCORM_API_Wrapper.js';
-import {scormConnected, updateUserProfile} from './../reducers/actions';
+import {scormConnected, updateUserProfile, changeMode} from './../reducers/actions';
+import { MODES } from '../constants/constants';
 
 let COMPLETION_THRESHOLD;
 let COMPLETION_ATTEMPT_THRESHOLD;
@@ -48,6 +49,7 @@ export default class SCORM extends React.Component {
     let scorm = new SCORM_WRAPPER.init(this.props.config.debug_scorm_api, this.props.config.debug_scorm_api_window);
     if(!SCORM_WRAPPER.isConnected()){
       this.props.dispatch(scormConnected(false));
+      this.props.dispatch(changeMode(MODES.LEARN));
       return;
     }
     this.props.dispatch(scormConnected(scorm));

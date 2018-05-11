@@ -110,6 +110,36 @@ div.header_wrapper img {
   background: #60e1ff;
 }
 
+#option-buttons {
+  float: right;
+  margin-top: 50px;
+  margin-right: 70px;
+  display: flex;
+}
+
+#option-buttons p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+#option-buttons select {
+  color: white;
+  background: #ffffff0d;
+  border: none;
+  margin-left: 20px;
+  -webkit-appearance: none;
+  appearance: none;
+  -moz-appearance: none;
+  padding: 5px 10px;
+}
+
+#option-buttons select:after {
+  display: none;
+}
+
+#option-buttons select:focus {
+  outline: none;
+}
 
 /* Quiz page page */
 

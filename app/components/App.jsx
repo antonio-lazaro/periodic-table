@@ -22,13 +22,13 @@ export class App extends React.Component {
 
     switch (this.props.page) {
       case PAGES.LEARN_PAGE:
-        appContent = (<LearnPage I18n={I18n} />);
+        appContent = (<LearnPage I18n={I18n} mode={this.props.mode} dispatch={this.props.dispatch} />);
         break;
       case PAGES.QUIZ_PAGE:
         appContent = (<QuizPage I18n={I18n} />);
         break;
       default:
-        appContent = (<LearnPage I18n={I18n} />);
+        appContent = (<LearnPage I18n={I18n} mode={this.props.mode} dispatch={this.props.dispatch} />);
     }
 
     return (

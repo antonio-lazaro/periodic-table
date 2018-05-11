@@ -70,6 +70,10 @@ export function getLanguage() {
   return locale;
 }
 
+export function setLanguage(language) {
+  locale = language;
+}
+
 export function getTrans(s, params){
 	// First language
   if((typeof LOCALES[locale] !== "undefined") && (typeof LOCALES[locale][s] === "string")){

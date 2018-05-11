@@ -6,8 +6,9 @@ import { changePage } from '../reducers/actions.jsx';
 
 import PeriodicTable from './PeriodicTable.jsx';
 import ElementDetail from './ElementDetail.jsx';
+import OptionButtons from './OptionButtons.jsx';
 
-import { PAGES } from '../constants/constants.jsx';
+import { PAGES, MODES } from '../constants/constants.jsx';
 
 export class LearnPage extends React.Component {
   constructor(props) {
@@ -31,6 +32,7 @@ export class LearnPage extends React.Component {
       <div id="learn-page">
         <p id="learn-page-title">{this.props.I18n.getTrans("i.learn_page_title")}</p>
         <button type="button" onClick={this.handleClick.bind(this)}>{this.props.I18n.getTrans("i.start_quiz_text")}</button>
+        {(this.props.mode != MODES.LEARN) ? <OptionButtons I18n={this.props.I18n} dispatch={this.props.dispatch} /> : ""}
         <div style={{ clear: 'both' }}></div>
         <PeriodicTable selectElement={this.selectElement.bind(this)} selectedElements={(this.state.selectedElement) ? [this.state.selectedElement] : []} I18n={this.props.I18n} />
         {(this.state.selectedElement) ? <div id="element-detail-shadow"></div> : undefined}

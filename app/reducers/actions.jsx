@@ -78,3 +78,11 @@ export function selectElement(element) {
     element
   };
 }
+
+// Change mode
+export function changeMode(mode) {
+  return {
+    type: 'CHANGE_MODE',
+    mode
+  };
+}

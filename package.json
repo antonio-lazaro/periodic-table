@@ -2,7 +2,8 @@
   "name": "RESCORM",
   "version": "0.0.2",
   "description": "A boilerplate for creating SCORM-compliant React applications",
-  "author": "Aldo Gordillo <agordillo@dit.upm.es>",
+  "author": "Antonio Lázaro",
+  "homepage": "https://antonio-lazaro.github.io/periodic-table",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server",
@@ -15,7 +16,9 @@
     "test:watch": "jest --watch",
     "coverage": "jest --coverage",
     "precommit": "cross-env npm run lint && npm test",
-    "prepush": "cross-env npm run lint && npm test"
+    "prepush": "cross-env npm run lint && npm test",
+    "predeploy": "",
+    "deploy": "gh-pages -d dist"
   },
   "jest": {
     "setupFiles": [
@@ -68,6 +71,7 @@
     "eslint-plugin-react": "7.2.0",
     "extract-text-webpack-plugin": "3.0.1",
     "file-loader": "1.1.4",
+    "gh-pages": "^1.1.0",
     "html-webpack-plugin": "2.30.0",
     "husky": "0.15.0-beta.2",
     "jest": "21.2.0",
