@@ -48,6 +48,12 @@ div.question div.question_choices {
   display: inline-flex;
   transform: scale(0.7);
   -webkit-transform-origin-x: 0;
+
+  @media only screen 
+  and (max-device-width : 414px) {
+    display: grid;
+    transform: scale(1);
+  }
 }
 
 div.question div.question_choice {
@@ -71,6 +77,11 @@ div.question div.question_choice p {
   margin: 0px 0px 0px 0px;
   color: #FFFFFFb0;
   user-select: none;
+
+  @media only screen 
+  and (max-device-width : 414px) {
+    font-size: 20px;
+  }
 }
 
 div.question div.question_choice.checked.question_choice_correct {
@@ -103,6 +114,7 @@ div.question div.questionButtonsWrapper button.answerQuestion, div.question div.
   width: 124px;
   height: 41px;
   margin-right: 20px;
+  margin-bottom: 20px;
   background: #00B8E3;
   border-radius: 100px;
   color: white;

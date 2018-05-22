@@ -95,6 +95,7 @@ div.header_wrapper img {
   @media only screen 
   and (max-device-width : 414px) {
     margin: 0;
+    float: left;
   }
 
   /* iPhone SE landscape */
@@ -115,6 +116,12 @@ div.header_wrapper img {
   margin-top: 50px;
   margin-right: 70px;
   display: flex;
+
+  @media only screen 
+  and (max-device-width : 414px) {
+    margin-top: 10px;
+    float: left;
+  }
 }
 
 #option-buttons p {
@@ -152,4 +159,9 @@ div.header_wrapper img {
   overflow: scroll;
   background-color: $quiz-page-container-color;
   padding: 40px 57px;
+
+  @media only screen 
+  and (max-device-width : 414px) {
+    padding: 10px 16px;
+  }
 }
