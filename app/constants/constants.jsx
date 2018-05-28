@@ -101,7 +101,7 @@ export const QUIZ_EN = {
     "difficulty": 9
   }, {
     question: "Which of the following elements has the highest atomic number?",
-    comparedField: "atomicNumber",
+    comparedField: "number",
     answerField: "name",
     condition: '>',
     answerType: "SELECT_ONE_ANSWER_COMPARE",

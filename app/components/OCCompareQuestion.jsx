@@ -159,7 +159,7 @@ export default class OCCompareQuestion extends React.Component {
     for(let i = 0; i < 4; i++) {
       if (i == this.state.randomPosition) {
         choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.state.correctElement[this.props.question.answerField], answer: true, index: i }} checked={(i == this.state.checkedPosition) ? true : false} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.state.answered}/>);
-      } else {
+      } else if (typeof this.state.randomElements[j] != 'undefined') {
         choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.state.randomElements[j][this.props.question.answerField], answer: false, index: i }} checked={(i == this.state.checkedPosition) ? true : false} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.state.answered}/>);
         j += 1;
       }

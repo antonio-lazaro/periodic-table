@@ -1,9 +1,13 @@
 import React from 'react';
 import './../assets/scss/main.scss';
 
+import { updateUserProfile } from '../reducers/actions';
+
 export default class OptionButtons extends React.Component {
   changeLevel(event) {
-
+    let userProfile = this.props.user_profile;
+    userProfile.learner_preference.difficulty = parseInt(event.target.value);
+    this.props.dispatch(updateUserProfile(userProfile))
   }
 
   changeLanguage(event) {

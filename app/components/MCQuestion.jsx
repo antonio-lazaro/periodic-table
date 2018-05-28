@@ -168,7 +168,7 @@ export default class MCQuestion extends React.Component {
       if (this.state.randomPositions.includes(i)) {
         choices.push(<MCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.state.askedElements[jAsked][this.props.question.answerField], answer: true, index: i }} checked={this.state.checkedPositions.includes(i)} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.state.answered}/>);
         jAsked += 1;
-      } else {
+      } else if (typeof this.state.randomElements[jRandom] != 'undefined') {
         choices.push(<MCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.state.randomElements[jRandom][this.props.question.answerField], answer: false, index: i }} checked={this.state.checkedPositions.includes(i)} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.state.answered}/>);
         jRandom += 1;
       }
