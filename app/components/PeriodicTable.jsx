@@ -12,8 +12,6 @@ import Element from './Element.jsx';
 export class PeriodicTable extends React.Component {
   constructor(props) {
     super(props);
-
-    this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
   }
 
   getElementComponent(i) {
@@ -31,6 +29,8 @@ export class PeriodicTable extends React.Component {
   }
 
   render() {
+    this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
+
     // Row 2
     var rowTwo = [];
     for (var i = 3; i <= 10; i++) {

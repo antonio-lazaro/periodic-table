@@ -12,15 +12,17 @@ import Quiz from './Quiz.jsx';
 import { QUIZ_EN } from '../constants/constants.jsx';
 import { QUIZ_ES } from '../constants/constants.jsx';
 
+import { addObjectives, updateQuestions, startQuiz } from './../reducers/actions';
+
 export class QuizPage extends React.Component {
   constructor(props) {
     super(props);
-
-    // Language
-    this.quiz = (this.props.I18n.getLanguage() == 'es') ? QUIZ_ES : QUIZ_EN;
   }
 
   render() {
+    // Language
+    this.quiz = (this.props.I18n.getLanguage() == 'es') ? QUIZ_ES : QUIZ_EN;
+
     let appHeader = "";
     let appContent = "";
 
@@ -30,7 +32,7 @@ export class QuizPage extends React.Component {
       );
       if(this.props.wait_for_user_profile !== true){
         appContent = (
-          <Quiz dispatch={this.props.dispatch} user_profile={this.props.user_profile} tracking={this.props.tracking} quiz={this.quiz} config={GLOBAL_CONFIG} I18n={this.props.I18n}/>
+          <Quiz dispatch={this.props.dispatch} user_profile={this.props.user_profile} tracking={this.props.tracking} quiz={this.props.quiz} QUIZ={this.quiz} config={GLOBAL_CONFIG} I18n={this.props.I18n} mode={this.props.mode}/>
         );
       }
     } else {

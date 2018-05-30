@@ -1,7 +1,7 @@
 import React from 'react';
 import './../assets/scss/finish_screen.scss';
 
-import { changePage, resetObjectives, finishApp } from '../reducers/actions.jsx';
+import { changePage, resetObjectives, finishApp, finishQuiz } from '../reducers/actions.jsx';
 
 import { PAGES } from '../constants/constants.jsx';
 
@@ -14,6 +14,7 @@ export default class FinishScreen extends React.Component {
     this.props.dispatch(changePage(PAGES.LEARN_PAGE));
     this.props.dispatch(resetObjectives());
     this.props.dispatch(finishApp(false));
+    this.props.dispatch(finishQuiz());
   }
 
   handleReset() {

@@ -27,12 +27,16 @@ export class LearnPage extends React.Component {
     this.setState({ selectedElement: element });
   }
 
+  forceRender() {
+    this.forceUpdate();
+  }
+
   render() {
     return (
       <div id="learn-page">
         <p id="learn-page-title">{this.props.I18n.getTrans("i.learn_page_title")}</p>
-        <button type="button" onClick={this.handleClick.bind(this)}>{this.props.I18n.getTrans("i.start_quiz_text")}</button>
-        {(this.props.mode != MODES.LEARN) ? <OptionButtons I18n={this.props.I18n} dispatch={this.props.dispatch} user_profile={this.props.user_profile} /> : ""}
+        <button type="button" onClick={this.handleClick.bind(this)}>{(!this.props.quiz.started) ? this.props.I18n.getTrans("i.start_quiz_text") : this.props.I18n.getTrans("i.continue_quiz")}</button>
+        {(this.props.mode != MODES.LEARN) ? <OptionButtons I18n={this.props.I18n} dispatch={this.props.dispatch} user_profile={this.props.user_profile} forceRender={this.forceRender.bind(this)} /> : ""}
         <div style={{ clear: 'both' }}></div>
         <PeriodicTable selectElement={this.selectElement.bind(this)} selectedElements={(this.state.selectedElement) ? [this.state.selectedElement] : []} I18n={this.props.I18n} />
         {(this.state.selectedElement) ? <div id="element-detail-shadow"></div> : undefined}

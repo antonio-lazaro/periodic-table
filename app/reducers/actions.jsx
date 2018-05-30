@@ -71,12 +71,27 @@ export function changePage(page) {
   };
 }
 
-// LarnPage Reducer
-export function selectElement(element) {
+// Quiz Reducer
+export function updateQuestions(questions) {
   return {
-    type: 'SELECT_ELEMENT',
-    element
+    type: 'UPDATE_QUESTIONS',
+    questions
   };
+}
+
+export function updateCurrentQuestionIndex(index) {
+  return {
+    type: 'UPDATE_CURRENT_QUESTION_INDEX',
+    index
+  };
+}
+
+export function startQuiz() {
+  return { type: 'START_QUIZ' };
+}
+
+export function finishQuiz() {
+  return { type: 'FINISH_QUIZ' };
 }
 
 // Change mode

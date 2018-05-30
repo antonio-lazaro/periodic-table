@@ -12,6 +12,7 @@ export default class OptionButtons extends React.Component {
 
   changeLanguage(event) {
     this.props.I18n.setLanguage(event.target.value);
+    this.props.forceRender();
   }
 
   render() {

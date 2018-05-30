@@ -5,7 +5,7 @@ import userProfileReducer from './userProfileReducer';
 import waitForUserProfileReducer from './waitForUserProfileReducer';
 
 import pageReducer from './pageReducer';
-import learnPageReducer from './learnPageReducer';
+import quizReducer from './quizReducer';
 
 function modeReducer(state = null, action) {
   switch (action.type){
@@ -22,8 +22,8 @@ const GlobalState = combineReducers({
   user_profile:userProfileReducer,
   wait_for_user_profile:waitForUserProfileReducer,
   page: pageReducer,
-  learnPage: learnPageReducer,
   mode: modeReducer,
+  quiz: quizReducer,
 });
 
 export default GlobalState;

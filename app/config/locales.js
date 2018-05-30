@@ -2,6 +2,7 @@ export let LOCALES = {
   en:{
     "i.learn_page_title":"Periodic Table of Elements",
     "i.start_quiz_text":"Start Quiz!",
+    "i.continue_quiz":"Continue",
     "i.answer":"Answer",
     "i.difficulty":"Difficulty",
     "i.finish_quiz":"Finish quiz",
@@ -15,6 +16,7 @@ export let LOCALES = {
     "i.progress":"Progress",
     "i.reset_question":"Reset",
     "i.reset_quiz":"Reset",
+    "i.go_to_pt":"Go to Periodic Table",
     "i.score":"Score",
     "i.title":"Periodic",
     "i.atomic_number":"atomic number",
@@ -30,6 +32,7 @@ export let LOCALES = {
   es:{
     "i.learn_page_title":"Tabla Periódica",
     "i.start_quiz_text":"Empezar Quiz!",
+    "i.continue_quiz":"Continuar",
     "i.answer":"Responder",
     "i.difficulty":"Dificultad",
     "i.finish_quiz":"Finalizar cuestionario",
@@ -43,6 +46,7 @@ export let LOCALES = {
     "i.progress": "Progreso",
     "i.reset_question":"Resetear",
     "i.reset_quiz":"Resetear cuestionario",
+    "i.go_to_pt":"Ir a la Tabla Periódica",
     "i.score":"Puntuación",
     "i.atomic_number":"número atómico",
     "i.atomic_mass": "masa atómica",

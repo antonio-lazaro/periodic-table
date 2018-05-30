@@ -14,10 +14,12 @@ export const INITIAL_STATE = {
   wait_for_user_profile: false,
 
   page: 'LEARN_PAGE',
-  learnPage: {
-    selectedElement: undefined
-  },
-  mode: 'EXAM'
+  mode: 'EXAM',
+  quiz: {
+    questions: [],
+    current_question_index: 1,
+    started: false
+  }
 };
 
 export const MODES = {
