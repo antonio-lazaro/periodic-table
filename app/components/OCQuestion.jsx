@@ -6,20 +6,14 @@ import {objectiveAccomplished, objectiveAccomplishedThunk} from './../reducers/a
 import OCQuestionChoice from './OCQuestionChoice.jsx';
 import QuestionButtons from './QuestionButtons.jsx';
 
-import { elements as elementsEN } from '../constants/PeriodicTableJSON.json';
-import { elements as elementsES } from '../constants/PeriodicTableJSON.es.json';
-
 export default class OCQuestion extends React.Component {
   constructor(props){
     super(props);
 
-    // Language
-    this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
-
-    let askedElement = this.elements[Math.floor(Math.random() * this.elements.length)];
+    let askedElement = this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)];
     let randomPosition = Math.floor(Math.random() * 4);
 
-    let incorrectAnswers = this.elements.filter((element) => {
+    let incorrectAnswers = this.props.posibleElements.filter((element) => {
       return element[this.props.question.answerField] != askedElement[this.props.question.answerField]
     })
 
@@ -71,12 +65,12 @@ export default class OCQuestion extends React.Component {
     let randomElements = [];
 
     for(let i = 0; i < 4; i++) {
-      let randomElement = this.elements[Math.floor(Math.random() * this.elements.length)];
+      let randomElement = this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)];
       randomElements.push(randomElement);
     }
 
     this.setState({
-      askedElement:  this.elements[Math.floor(Math.random() * this.elements.length)],
+      askedElement:  this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)],
       randomPosition: Math.floor(Math.random() * 4),
       randomElements: randomElements,
       checkedPosition: undefined,

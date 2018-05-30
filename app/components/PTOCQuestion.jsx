@@ -7,17 +7,11 @@ import PeriodicTable from './PeriodicTable.jsx';
 import OCQuestionChoice from './OCQuestionChoice.jsx';
 import QuestionButtons from './QuestionButtons.jsx';
 
-import { elements as elementsEN } from '../constants/PeriodicTableJSON.json';
-import { elements as elementsES } from '../constants/PeriodicTableJSON.es.json';
-
 export default class PTOCQuestion extends React.Component {
   constructor(props){
     super(props);
 
-    // Language
-    this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
-
-    let askedElement = this.elements[Math.floor(Math.random() * this.elements.length)];
+    let askedElement = this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)];
 
     this.state = {
       answered: false,
@@ -56,7 +50,7 @@ export default class PTOCQuestion extends React.Component {
     this.props.onNextQuestion();
 
     this.setState({
-      askedElement:  this.elements[Math.floor(Math.random() * this.elements.length)],
+      askedElement:  this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)],
       selectedElement: undefined,
     });
   }

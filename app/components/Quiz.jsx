@@ -48,6 +48,21 @@ export default class Quiz extends React.Component {
       this.props.dispatch(startQuiz());
     }
 
+    let difficulty = this.props.user_profile.learner_preference.difficulty;
+    
+    // Language
+    this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
+
+    // Get posible asked Elments
+    let posibleElements = this.elements.filter((element) => {
+      if (difficulty < 6) {
+        return (element.ypos <= 6 || element.xpos == 1)
+      }
+      return true
+    });
+
+    this.posibleElements = posibleElements;
+
     this.state = {
       quiz: quiz,
       current_question_index: current_question_index,
@@ -70,18 +85,6 @@ export default class Quiz extends React.Component {
 
     let quiz = this.props.QUIZ;
     let questions = quiz.questions;
-
-    // Language
-    this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
-
-    // Get askedElement
-    let posibleElements = this.elements.filter((element) => {
-      if (difficulty < 6) {
-        return (element.ypos <= 6 || element.xpos == 1)
-      }
-      return true
-    })
-    let askedElement = posibleElements[Math.floor(Math.random() * posibleElements.length)];
 
     // Adaptive behaviour
     // Sort questions based on difficulty
@@ -141,19 +144,19 @@ export default class Quiz extends React.Component {
 
     switch (currentQuestion.answerType) {
       case ANSWER_TYPES.SELECT_ONE_ANSWER:
-        currentQuestionRender = (<OCQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} difficulty={this.props.user_profile.learner_preference.difficulty} mode={this.props.mode} />);
+        currentQuestionRender = (<OCQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.mode} posibleElements={this.posibleElements} />);
         break;
       case ANSWER_TYPES.SELECT_MULTIPLE_ANSWER:
-        currentQuestionRender = (<MCQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} difficulty={this.props.user_profile.learner_preference.difficulty} mode={this.props.mode} />);
+        currentQuestionRender = (<MCQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.mode} posibleElements={this.posibleElements} />);
         break;
       case ANSWER_TYPES.PT_SELECT_ONE_ANSWER:
-        currentQuestionRender = (<PTOCQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} difficulty={this.props.user_profile.learner_preference.difficulty} mode={this.props.mode} />);
+        currentQuestionRender = (<PTOCQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.mode} posibleElements={this.posibleElements} />);
         break;
       case ANSWER_TYPES.PT_SELECT_MULTIPLE_ANSWER:
-        currentQuestionRender = (<PTMCQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} difficulty={this.props.user_profile.learner_preference.difficulty} mode={this.props.mode} />);
+        currentQuestionRender = (<PTMCQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.mode} posibleElements={this.posibleElements} />);
         break;
       case ANSWER_TYPES.SELECT_ONE_ANSWER_COMPARE:
-        currentQuestionRender = (<OCCompareQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} difficulty={this.props.user_profile.learner_preference.difficulty} mode={this.props.mode} />);
+        currentQuestionRender = (<OCCompareQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.mode} posibleElements={this.posibleElements} />);
         break;
       default:
         currentQuestionRender = "Question type not supported";

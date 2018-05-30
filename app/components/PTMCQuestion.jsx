@@ -6,21 +6,15 @@ import {objectiveAccomplished, objectiveAccomplishedThunk} from './../reducers/a
 import PeriodicTable from './PeriodicTable.jsx';
 import QuestionButtons from './QuestionButtons.jsx';
 
-import { elements as elementsEN } from '../constants/PeriodicTableJSON.json';
-import { elements as elementsES } from '../constants/PeriodicTableJSON.es.json';
-
 export default class PTMCQuestion extends React.Component {
   constructor(props){
     super(props);
 
-    // Language
-    this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
-
     // Select a random element
-    let randomElement = this.elements[Math.floor(Math.random() * this.elements.length)];
+    let randomElement = this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)];
 
     // Filter all correct answers
-    let correctAnswers = this.elements.filter((element) => {
+    let correctAnswers = this.props.posibleElements.filter((element) => {
       return element[this.props.question.askedField] == randomElement[this.props.question.askedField]
     });
 
@@ -76,7 +70,7 @@ export default class PTMCQuestion extends React.Component {
     this.props.onNextQuestion();
 
     this.setState({
-      randomElement:  this.elements[Math.floor(Math.random() * this.elements.length)],
+      randomElement:  this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)],
       selectedElements: [],
       answered: false
     });

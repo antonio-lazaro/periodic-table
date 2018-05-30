@@ -6,24 +6,18 @@ import {objectiveAccomplished, objectiveAccomplishedThunk} from './../reducers/a
 import OCQuestionChoice from './OCQuestionChoice.jsx';
 import QuestionButtons from './QuestionButtons.jsx';
 
-import { elements as elementsEN } from '../constants/PeriodicTableJSON.json';
-import { elements as elementsES } from '../constants/PeriodicTableJSON.es.json';
-
 export default class OCCompareQuestion extends React.Component {
   constructor(props){
     super(props);
 
-    // Language
-    this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
-
-    let askedElement = this.elements[Math.floor(Math.random() * this.elements.length)];
+    let askedElement = this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)];
     let randomPosition = Math.floor(Math.random() * 4);
 
     let condition = this.props.question.condition;
     let correctAnswers;
 
     if (condition == '=') {
-      correctAnswers = this.elements.filter((element) => {
+      correctAnswers = this.props.posibleElements.filter((element) => {
         if (condition == '=') {
           return element[this.props.question.comparedField] == askedElement[this.props.question.comparedField]
         }
@@ -31,7 +25,7 @@ export default class OCCompareQuestion extends React.Component {
       });
     }
 
-    let incorrectAnswers = this.elements.filter((element) => {
+    let incorrectAnswers = this.props.posibleElements.filter((element) => {
       if (condition == '=') {
         return element[this.props.question.comparedField] != askedElement[this.props.question.comparedField]
       } else if (condition == '>') {
@@ -95,13 +89,13 @@ export default class OCCompareQuestion extends React.Component {
   onNextQuestion() {
     this.props.onNextQuestion();
 
-    let askedElement = this.elements[Math.floor(Math.random() * this.elements.length)];
+    let askedElement = this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)];
 
     let condition = this.props.question.condition;
     let correctAnswers;
 
     if (condition == '=') {
-      correctAnswers = this.elements.filter((element) => {
+      correctAnswers = this.props.posibleElements.filter((element) => {
         if (condition == '=') {
           return element[this.props.question.comparedField] == askedElement[this.props.question.comparedField]
         }
@@ -109,7 +103,7 @@ export default class OCCompareQuestion extends React.Component {
       });
     }
 
-    let incorrectAnswers = this.elements.filter((element) => {
+    let incorrectAnswers = this.props.posibleElements.filter((element) => {
       if (condition == '=') {
         return element[this.props.question.comparedField] != askedElement[this.props.question.comparedField]
       } else if (condition == '>') {
