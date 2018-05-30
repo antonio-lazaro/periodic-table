@@ -12,6 +12,7 @@ export let GLOBAL_CONFIG = {
       score_threshold:0.6,
     },
     n:3,
+    mode: 'LEARN'
   },
   production:{
     debug:false,
@@ -25,6 +26,7 @@ export let GLOBAL_CONFIG = {
       score_threshold:0.6,
     },
     n: 5,
+    mode: 'LEARN'
   },
 };
 

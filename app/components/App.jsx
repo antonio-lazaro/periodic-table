@@ -22,13 +22,13 @@ export class App extends React.Component {
 
     switch (this.props.page) {
       case PAGES.LEARN_PAGE:
-        appContent = (<LearnPage I18n={I18n} />);
+        appContent = (<LearnPage I18n={I18n} config={GLOBAL_CONFIG} />);
         break;
       case PAGES.QUIZ_PAGE:
-        appContent = (<QuizPage I18n={I18n} />);
+        appContent = (<QuizPage I18n={I18n} config={GLOBAL_CONFIG} />);
         break;
       default:
-        appContent = (<LearnPage I18n={I18n} />);
+        appContent = (<LearnPage I18n={I18n} config={GLOBAL_CONFIG} />);
     }
 
     return (
