@@ -112,7 +112,7 @@ div.question div.questionButtonsWrapper {
 div.question div.questionButtonsWrapper button.answerQuestion, div.question div.questionButtonsWrapper button.resetQuestion, div.question div.questionButtonsWrapper button.resetQuiz, div.question div.questionButtonsWrapper button.nextQuestion {
   border: none;
   width: 124px;
-  height: 41px;
+  min-height: 41px;
   margin-right: 20px;
   margin-bottom: 20px;
   background: #00B8E3;

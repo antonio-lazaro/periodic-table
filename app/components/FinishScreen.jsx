@@ -1,7 +1,7 @@
 import React from 'react';
 import './../assets/scss/finish_screen.scss';
 
-import { changePage, resetObjectives, finishApp, finishQuiz } from '../reducers/actions.jsx';
+import { changePage, resetObjectives, finishApp, finishQuiz, updateCurrentQuestionIndex } from '../reducers/actions.jsx';
 
 import { PAGES } from '../constants/constants.jsx';
 
@@ -18,6 +18,7 @@ export default class FinishScreen extends React.Component {
   }
 
   handleReset() {
+    this.props.dispatch(updateCurrentQuestionIndex(1));
     this.props.dispatch(resetObjectives());
     this.props.dispatch(finishApp(false));
   }
@@ -39,12 +40,13 @@ export default class FinishScreen extends React.Component {
     return finishTitleText;
   }
   render(){
-    let finishTitleText = this._getFinishScreenTitle(this.props.tracking.progress_measure, this.props.tracking.score);
+    let finishTitleText = this.props.I18n.getTrans("i.finish_screen_title_full", { score:(this.props.tracking.score * 100) });
+    let resetButton = (this.props.config.mode == "LEARN") ? <button type="button" onClick={this.handleReset.bind(this)}>{this.props.I18n.getTrans("i.reset_quiz!")}</button> : "";
     return (
       <div className="finish_screen">
         <p id="finish_title">{finishTitleText}</p>
-        <button type="button" onClick={this.handleClick.bind(this)}>Go to Periodic Table!</button>
-        <button type="button" onClick={this.handleReset.bind(this)}>Reset Quiz!</button>
+        <button type="button" onClick={this.handleClick.bind(this)}>{this.props.I18n.getTrans("i.go_to_pt!")}</button>
+        {resetButton}
       </div>
     );
   }

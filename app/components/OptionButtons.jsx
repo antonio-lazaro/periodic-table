@@ -16,18 +16,31 @@ export default class OptionButtons extends React.Component {
   }
 
   render() {
+    // Levels
+    var levels = [];
+    for(var i = 0; i < 9; i++) {
+      if(i == this.props.user_profile.learner_preference.difficulty) {
+        levels.push(<option key={i} selected value={i+1}>Level {i+1}</option>);
+      } else {
+        levels.push(<option key={i} value={i+1}>Level {i+1}</option>);
+      }
+    }
+
+    // Languages
+    var validLns = ["en", "es"];
+    var lns = [];
+    for(var i = 0; i < validLns.length; i++) {
+      if(validLns[i] == this.props.I18n.getLanguage()) {
+        lns.push(<option key={i} selected value={validLns[i]}>{validLns[i]}</option>);
+      } else {
+        lns.push(<option key={i} value={validLns[i]}>{validLns[i]}</option>);
+      }
+    }
+
     return (
       <div id="option-buttons">
         <select name="levels" onChange={this.changeLevel.bind(this)}>
-          <option value="1">Level 1</option>
-          <option value="2">Level 2</option>
-          <option value="3">Level 3</option>
-          <option value="4">Level 4</option>
-          <option value="5">Level 5</option>
-          <option value="6">Level 6</option>
-          <option value="7">Level 7</option>
-          <option value="8">Level 8</option>
-          <option value="9">Level 9</option>
+          {levels}
         </select>
         <select name="language" onChange={this.changeLanguage.bind(this)}>
           <option value="en">en</option>

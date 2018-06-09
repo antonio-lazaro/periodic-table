@@ -19,7 +19,7 @@ $element-detail-container-width: 318px;
 
 #scroll-container {
 	margin: 0;
-	overflow: scroll;
+	overflow: auto;
 }
 
 #scroll-container.selected {
@@ -265,7 +265,7 @@ $element-detail-container-width: 318px;
 	width: $element-detail-container-width;
 	background: $element-detail-container-color;
 	padding: 22px 40px;
-	overflow: scroll;
+	overflow: auto;
 
 	/* width < 414px */
 	@media only screen 

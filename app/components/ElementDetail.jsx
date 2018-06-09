@@ -19,7 +19,7 @@ export default class ElementDetail extends React.Component {
     };
     return (
       <div id="element-detail-container">
-        <button id="close-button" style={closeButtonStyle} onClick={this.handleCloseButtonClick.bind(this)}>Close</button>
+        <button id="close-button" style={closeButtonStyle} onClick={this.handleCloseButtonClick.bind(this)}>{this.props.I18n.getTrans("i.close")}</button>
         <p className="symbol">{this.props.element.symbol}</p>
         <div style={{ clear: 'both' }}></div>
         <p className="name">{this.props.element.name}</p>

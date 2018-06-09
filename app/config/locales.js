@@ -6,7 +6,7 @@ export let LOCALES = {
     "i.answer":"Answer",
     "i.difficulty":"Difficulty",
     "i.finish_quiz":"Finish quiz",
-    "i.finish_screen_title_full":"The content has ended. You may close this window. Your final progress was #{progress_measure}% and your final score was #{score}%.",
+    "i.finish_screen_title_full":"Score: #{score}%",
     "i.finish_screen_title_wpm":"The content has ended. You may close this window. Your final progress was #{progress_measure}%.",
     "i.finish_screen_title_ws":"The content has ended. You may close this window. Your final score was #{score}%.",
     "i.finish_screen_title_simple":"The content has ended. You may close this window.",
@@ -16,7 +16,9 @@ export let LOCALES = {
     "i.progress":"Progress",
     "i.reset_question":"Reset",
     "i.reset_quiz":"Reset",
+    "i.reset_quiz!":"Reset Quiz!",
     "i.go_to_pt":"Go to Periodic Table",
+    "i.go_to_pt!":"Go to Periodic Table!",
     "i.score":"Score",
     "i.title":"Periodic",
     "i.atomic_number":"atomic number",
@@ -27,7 +29,8 @@ export let LOCALES = {
     "i.molar_heat":"molar heat",
     "i.state":"state (A.T.)",
     "i.lanthanides": "Lanthanides",
-    "i.actinides": "Actinides"
+    "i.actinides": "Actinides",
+    "i.close": "Close"
   },
   es:{
     "i.learn_page_title":"Tabla Periódica",
@@ -36,7 +39,7 @@ export let LOCALES = {
     "i.answer":"Responder",
     "i.difficulty":"Dificultad",
     "i.finish_quiz":"Finalizar cuestionario",
-    "i.finish_screen_title_full":"El contenido ha terminado. Puede cerrar esta ventana. Su progreso final fue #{progress_measure}% y su puntuación final fue #{score}%.",
+    "i.finish_screen_title_full":"Puntuación: #{score}%",
     "i.finish_screen_title_wpm":"El contenido ha terminado. Puede cerrar esta ventana. Su progreso final fue #{progress_measure}%.",
     "i.finish_screen_title_ws":"El contenido ha terminado. Puede cerrar esta ventana. Su puntuación final fue #{score}%.",
     "i.finish_screen_title_simple":"El contenido ha terminado. Puede cerrar esta ventana.",
@@ -46,7 +49,9 @@ export let LOCALES = {
     "i.progress": "Progreso",
     "i.reset_question":"Resetear",
     "i.reset_quiz":"Resetear cuestionario",
+    "i.reset_quiz!":"¡Resetear cuestionario!",
     "i.go_to_pt":"Ir a la Tabla Periódica",
+    "i.go_to_pt!":"¡Ir a la Tabla Periódica!",
     "i.score":"Puntuación",
     "i.atomic_number":"número atómico",
     "i.atomic_mass": "masa atómica",
@@ -56,6 +61,7 @@ export let LOCALES = {
     "i.molar_heat": "masa molar",
     "i.state":"estado (T.A.)",
     "i.lanthanides": "Lantanos",
-    "i.actinides": "Actinios"
+    "i.actinides": "Actinios",
+    "i.close": "Cerrar"
   },
 };
