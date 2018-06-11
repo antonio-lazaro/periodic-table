@@ -66,6 +66,14 @@ function isValidLanguage(language){
   return ((typeof language === "string") && (["en", "es"].indexOf(language) !== -1));
 }
 
+export function getLanguage() {
+  return locale;
+}
+
+export function setLanguage(language) {
+  locale = language;
+}
+
 export function getTrans(s, params){
 	// First language
   if((typeof LOCALES[locale] !== "undefined") && (typeof LOCALES[locale][s] === "string")){
@@ -85,7 +93,7 @@ export function getTrans(s, params){
  * // "i.dtest"	: "Download #{name}",
  * // getTrans("i.dtest", {name: "SCORM package"}) -> "Download SCORM package"
  */
-function getTransWithParams(trans, params){
+export function getTransWithParams(trans, params){
   if(typeof params !== "object"){
     return trans;
   }
