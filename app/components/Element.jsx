@@ -1,23 +1,23 @@
 import React from 'react';
 import './../assets/scss/periodicTable.scss';
 
-import { ELEMENT_GROUPS } from '../constants/constants';
+import {ELEMENT_GROUPS} from '../constants/constants';
 
 export default class Element extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick() {
+  handleClick(){
     this.props.selectElement(this.props.element);
   }
 
-  render() {
+  render(){
     let classes = "";
 
-    if (typeof this.props.answered === "undefined") {
+    if(typeof this.props.answered === "undefined"){
       let group = this.props.element.category.replace(/ /g, "-").split(",")[0];
       classes += " " + ELEMENT_GROUPS[group];
     }
@@ -25,7 +25,7 @@ export default class Element extends React.Component {
     let selectedClass = "element-selected";
     classes += (this.props.selected) ? " " + selectedClass : "";
 
-    if (typeof this.props.answered !== "undefined" && (this.props.answered || this.props.correct)) {
+    if(typeof this.props.answered !== "undefined" && (this.props.answered || this.props.correct)){
       let correctClass = "choice-correct";
       let incorrectClass = "choice-incorrect";
       let correct = (this.props.answered && this.props.correct) ? " " + correctClass : ((this.props.answered) ? " " + incorrectClass : "");
@@ -33,7 +33,7 @@ export default class Element extends React.Component {
     }
 
     let show = true;
-    if (typeof this.props.show !== "undefined" && !this.props.answered) {
+    if(typeof this.props.show !== "undefined" && !this.props.answered){
       show = this.props.show;
     }
     return (

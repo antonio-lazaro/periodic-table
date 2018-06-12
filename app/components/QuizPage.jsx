@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import './../assets/scss/main.scss';
 
 import * as SAMPLES from '../config/samples.js';
@@ -8,17 +8,17 @@ import Header from './Header.jsx';
 import FinishScreen from './FinishScreen.jsx';
 import Quiz from './Quiz.jsx';
 
-import { QUIZ_EN } from '../constants/constants.jsx';
-import { QUIZ_ES } from '../constants/constants.jsx';
+import {QUIZ_EN} from '../constants/constants.jsx';
+import {QUIZ_ES} from '../constants/constants.jsx';
 
-import { addObjectives, updateQuestions, startQuiz } from './../reducers/actions';
+import {addObjectives, updateQuestions, startQuiz} from './../reducers/actions';
 
 export class QuizPage extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
   }
 
-  render() {
+  render(){
     // Language
     this.quiz = (this.props.I18n.getLanguage() == 'es') ? QUIZ_ES : QUIZ_EN;
 
@@ -36,7 +36,7 @@ export class QuizPage extends React.Component {
       }
     } else {
       appContent = (
-        <FinishScreen dispatch={this.props.dispatch} user_profile={this.props.user_profile} tracking={this.props.tracking} quiz={this.quiz} config={this.props.config} I18n={this.props.I18n}/>
+        <FinishScreen dispatch={this.props.dispatch} user_profile={this.props.user_profile} tracking={this.props.tracking} quiz={this.props.quiz} config={this.props.config} I18n={this.props.I18n}/>
       );
     }
 
@@ -49,7 +49,7 @@ export class QuizPage extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state){
   return state;
 }
 

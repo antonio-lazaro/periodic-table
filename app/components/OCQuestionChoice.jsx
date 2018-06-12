@@ -1,12 +1,12 @@
 import React from 'react';
 
 export default class OCQuestionChoice extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
   }
-  render() {
+  render(){
     let questionClassName = "question_choice";
-    if (this.props.checked) {
+    if(this.props.checked){
       questionClassName += " checked";
     }
     let showCorrection = (this.props.questionAnswered);

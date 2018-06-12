@@ -64,40 +64,40 @@ export function finishApp(finished = true){
 }
 
 // Page Reducer
-export function changePage(page) {
+export function changePage(page){
   return {
-    type: 'CHANGE_PAGE',
-    page
+    type:'CHANGE_PAGE',
+    page,
   };
 }
 
 // Quiz Reducer
-export function updateQuestions(questions) {
+export function updateQuestions(questions){
   return {
-    type: 'UPDATE_QUESTIONS',
-    questions
+    type:'UPDATE_QUESTIONS',
+    questions,
   };
 }
 
-export function updateCurrentQuestionIndex(index) {
+export function updateCurrentQuestionIndex(index){
   return {
-    type: 'UPDATE_CURRENT_QUESTION_INDEX',
-    index
+    type:'UPDATE_CURRENT_QUESTION_INDEX',
+    index,
   };
 }
 
-export function startQuiz() {
-  return { type: 'START_QUIZ' };
+export function startQuiz(){
+  return {type:'START_QUIZ'};
 }
 
-export function finishQuiz() {
-  return { type: 'FINISH_QUIZ' };
+export function finishQuiz(){
+  return {type:'FINISH_QUIZ'};
 }
 
 // Change mode
-export function changeMode(mode) {
+export function changeMode(mode){
   return {
-    type: 'CHANGE_MODE',
-    mode
+    type:'CHANGE_MODE',
+    mode,
   };
 }

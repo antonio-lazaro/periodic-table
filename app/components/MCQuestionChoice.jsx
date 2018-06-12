@@ -6,18 +6,18 @@ export default class MCQuestionChoice extends React.Component {
   }
   render(){
     let questionClassName = "question_choice";
-    if (this.props.checked) {
+    if(this.props.checked){
       questionClassName += " checked";
     }
     let showCorrection = (this.props.questionAnswered);
-    if (showCorrection) {
-      if (this.props.checked) {
-        if (this.props.choice.answer === true){
+    if(showCorrection){
+      if(this.props.checked){
+        if(this.props.choice.answer === true){
           questionClassName += " question_choice_correct";
         } else {
           questionClassName += " question_choice_incorrect";
         }
-      } else if (this.props.choice.answer === true){
+      } else if(this.props.choice.answer === true){
         questionClassName += " question_choice_correct";
       }
     }

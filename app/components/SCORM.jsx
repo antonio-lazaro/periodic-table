@@ -1,7 +1,7 @@
 import React from 'react';
 import * as SCORM_WRAPPER from '../vendors/SCORM_API_Wrapper.js';
 import {scormConnected, updateUserProfile, changeMode} from './../reducers/actions';
-import { MODES } from '../constants/constants';
+import {MODES} from '../constants/constants';
 
 let COMPLETION_THRESHOLD;
 let COMPLETION_ATTEMPT_THRESHOLD;

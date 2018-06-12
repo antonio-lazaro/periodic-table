@@ -11,10 +11,10 @@ export default class PTMCQuestion extends React.Component {
     super(props);
 
     this.state = {
-      answered: this.props.question.answered,
-      randomElement: this.props.question.randomElement,
-      correctAnswers: this.props.question.correctAnswers,
-      selectedElements: this.props.question.selectedElements
+      answered:this.props.question.answered,
+      randomElement:this.props.question.randomElement,
+      correctAnswers:this.props.question.correctAnswers,
+      selectedElements:this.props.question.selectedElements,
     };
 
     this.selectElement = this.selectElement.bind(this);
@@ -22,28 +22,28 @@ export default class PTMCQuestion extends React.Component {
     this.onResetQuestion = this.onResetQuestion.bind(this);
     this.onNextQuestion = this.onNextQuestion.bind(this);
   }
-  selectElement(element) {
-    if (this.state.answered) { return }
+  selectElement(element){
+    if(this.state.answered){ return; }
     let newSelectedElements = Object.assign([], this.state.selectedElements);
     let indexOf = newSelectedElements.indexOf(element);
-    if (indexOf === -1) {
+    if(indexOf === -1){
       newSelectedElements.push(element);
     } else {
       newSelectedElements.splice(indexOf, 1);
     }
-    this.setState({ selectedElements: newSelectedElements });
+    this.setState({selectedElements:newSelectedElements});
     let question = this.props.question;
     question.selectedElements = newSelectedElements;
     this.props.updateQuestion(question);
   }
-  onAnswerQuestion() {
+  onAnswerQuestion(){
     // Calculate score
     let nChoices = this.state.selectedElements.length;
     let correctAnswers = 0;
     let incorrectAnswers = 0;
 
-    for(let i = 0; i < nChoices; i++) {
-      if(this.state.correctAnswers.includes(this.state.selectedElements[i])) {
+    for(let i = 0; i < nChoices; i++){
+      if(this.state.correctAnswers.includes(this.state.selectedElements[i])){
         correctAnswers += 1;
       } else {
         incorrectAnswers += 1;
@@ -62,13 +62,13 @@ export default class PTMCQuestion extends React.Component {
     question.answered = true;
     this.props.updateQuestion(question);
   }
-  onResetQuestion() {
-    this.setState({selectedElements: [], answered: false});
+  onResetQuestion(){
+    this.setState({selectedElements:[], answered:false});
   }
-  onNextQuestion() {
+  onNextQuestion(){
     this.props.onNextQuestion();
   }
-  render() {
+  render(){
     let question = this.props.I18n.getTransWithParams(this.props.question.question, this.state.randomElement);
 
     return (

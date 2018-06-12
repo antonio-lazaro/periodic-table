@@ -11,12 +11,12 @@ export default class OCCompareQuestion extends React.Component {
     super(props);
 
     this.state = {
-      answered: this.props.question.answered,
-      askedElement: this.props.question.askedElement,
-      correctElement: this.props.question.correctElement,
-      randomPosition: this.props.question.randomPosition,
-      randomElements: this.props.question.randomElements,
-      checkedPosition: this.props.question.checkedPosition
+      answered:this.props.question.answered,
+      askedElement:this.props.question.askedElement,
+      correctElement:this.props.question.correctElement,
+      randomPosition:this.props.question.randomPosition,
+      randomElements:this.props.question.randomElements,
+      checkedPosition:this.props.question.checkedPosition,
     };
 
     this.handleChoiceChange = this.handleChoiceChange.bind(this);
@@ -24,19 +24,19 @@ export default class OCCompareQuestion extends React.Component {
     this.onResetQuestion = this.onResetQuestion.bind(this);
     this.onNextQuestion = this.onNextQuestion.bind(this);
   }
-  
-  handleChoiceChange(choice) {
-    this.setState({checkedPosition: choice.index});
+
+  handleChoiceChange(choice){
+    this.setState({checkedPosition:choice.index});
     let question = this.props.question;
     question.checkedPosition = choice.index;
     this.props.updateQuestion(question);
   }
-  onAnswerQuestion() {
+  onAnswerQuestion(){
     // Send data via SCORM
     let objective = this.props.objective;
     let scorePercentage = 0;
 
-    if (this.state.checkedPosition && this.state.checkedPosition == this.state.randomPosition) {
+    if(this.state.checkedPosition && this.state.checkedPosition == this.state.randomPosition){
       scorePercentage = 1;
     } else {
       scorePercentage = 0;
@@ -50,13 +50,13 @@ export default class OCCompareQuestion extends React.Component {
     question.answered = true;
     this.props.updateQuestion(question);
   }
-  onResetQuestion() {
-    this.setState({checkedPosition: undefined, answered: false});
+  onResetQuestion(){
+    this.setState({checkedPosition:undefined, answered:false});
   }
-  onNextQuestion() {
+  onNextQuestion(){
     this.props.onNextQuestion();
   }
-  render() {
+  render(){
     // let question = this.props.question.question.replace(/__(.*)__/g, function (x, param) {
     //   return param; // this.state.askedElement[param];
     // });
@@ -70,11 +70,11 @@ export default class OCCompareQuestion extends React.Component {
     let choices = [];
     let j = 0;
 
-    for(let i = 0; i < 4; i++) {
-      if (i == this.state.randomPosition) {
-        choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.state.correctElement[this.props.question.answerField], answer: true, index: i }} checked={(i == this.state.checkedPosition) ? true : false} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.state.answered}/>);
-      } else if (typeof this.state.randomElements[j] != 'undefined') {
-        choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.state.randomElements[j][this.props.question.answerField], answer: false, index: i }} checked={(i == this.state.checkedPosition) ? true : false} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.state.answered}/>);
+    for(let i = 0; i < 4; i++){
+      if(i == this.state.randomPosition){
+        choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{value:this.state.correctElement[this.props.question.answerField], answer:true, index:i}} checked={(i == this.state.checkedPosition)} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.state.answered}/>);
+      } else if(typeof this.state.randomElements[j] !== 'undefined'){
+        choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{value:this.state.randomElements[j][this.props.question.answerField], answer:false, index:i}} checked={(i == this.state.checkedPosition)} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.state.answered}/>);
         j += 1;
       }
     }

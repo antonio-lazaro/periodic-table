@@ -7,7 +7,7 @@ import MCQuestionChoice from './MCQuestionChoice.jsx';
 import QuestionButtons from './QuestionButtons.jsx';
 
 export default class MCQuestion extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
 
     this.handleChoiceChange = this.handleChoiceChange.bind(this);
@@ -16,11 +16,11 @@ export default class MCQuestion extends React.Component {
     this.onNextQuestion = this.onNextQuestion.bind(this);
   }
 
-  handleChoiceChange(choice) {
-    if (this.props.question.answered) { return }
+  handleChoiceChange(choice){
+    if(this.props.question.answered){ return; }
     let newSelectedChoices = Object.assign([], this.props.question.checkedPositions);
     let indexOf = newSelectedChoices.indexOf(choice.index);
-    if (indexOf === -1) {
+    if(indexOf === -1){
       newSelectedChoices.push(choice.index);
     } else {
       newSelectedChoices.splice(indexOf, 1);
@@ -29,14 +29,14 @@ export default class MCQuestion extends React.Component {
     question.checkedPositions = newSelectedChoices;
     this.props.updateQuestion(question);
   }
-  onAnswerQuestion() {
+  onAnswerQuestion(){
     // Calculate score
     let nChoices = this.props.question.checkedPositions.length;
     let correctAnswers = 0;
     let incorrectAnswers = 0;
 
-    for(let i = 0; i < nChoices; i++) {
-      if(this.props.question.randomPositions.includes(this.props.question.checkedPositions[i])) {
+    for(let i = 0; i < nChoices; i++){
+      if(this.props.question.randomPositions.includes(this.props.question.checkedPositions[i])){
         correctAnswers += 1;
       } else {
         incorrectAnswers += 1;
@@ -45,14 +45,12 @@ export default class MCQuestion extends React.Component {
 
     let scorePercentage;
 
-    if (this.props.question.askedElements.length > 0) {
+    if(this.props.question.askedElements.length > 0){
       scorePercentage = Math.max(0, (correctAnswers - incorrectAnswers) / this.props.question.askedElements.length);
+    } else if(incorrectAnswers > 0){
+      scorePercentage = 0;
     } else {
-      if (incorrectAnswers > 0) {
-        scorePercentage = 0;
-      } else {
-        scorePercentage = 1;
-      }
+      scorePercentage = 1;
     }
 
     // Send data via SCORM
@@ -65,30 +63,30 @@ export default class MCQuestion extends React.Component {
     question.answered = true;
     this.props.updateQuestion(question);
   }
-  onResetQuestion() {
+  onResetQuestion(){
     let question = this.props.question;
     question.checkedPositions = [];
     question.answered = false;
     this.props.updateQuestion(question);
     this.props.dispatch(objectiveAccomplished(this.props.objective.id, 0));
   }
-  onNextQuestion() {
+  onNextQuestion(){
     this.props.onNextQuestion();
   }
 
-  render() {
+  render(){
     let question = this.props.I18n.getTransWithParams(this.props.question.question, this.props.question.randomElement);
-    
+
     let choices = [];
     let jAsked = 0;
     let jRandom = 0;
 
-    for(let i = 0; i < 4; i++) {
-      if (this.props.question.randomPositions.includes(i)) {
-        choices.push(<MCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.props.question.askedElements[jAsked][this.props.question.answerField], answer: true, index: i }} checked={this.props.question.checkedPositions.includes(i)} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.props.question.answered}/>);
+    for(let i = 0; i < 4; i++){
+      if(this.props.question.randomPositions.includes(i)){
+        choices.push(<MCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{value:this.props.question.askedElements[jAsked][this.props.question.answerField], answer:true, index:i}} checked={this.props.question.checkedPositions.includes(i)} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.props.question.answered}/>);
         jAsked += 1;
-      } else if (typeof this.props.question.randomElements[jRandom] != 'undefined') {
-        choices.push(<MCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.props.question.randomElements[jRandom][this.props.question.answerField], answer: false, index: i }} checked={this.props.question.checkedPositions.includes(i)} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.props.question.answered}/>);
+      } else if(typeof this.props.question.randomElements[jRandom] !== 'undefined'){
+        choices.push(<MCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{value:this.props.question.randomElements[jRandom][this.props.question.answerField], answer:false, index:i}} checked={this.props.question.checkedPositions.includes(i)} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.props.question.answered}/>);
         jRandom += 1;
       }
     }

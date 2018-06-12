@@ -2,26 +2,26 @@ import React from 'react';
 import './../assets/scss/periodicTable.scss';
 
 export default class ElementDetail extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
   }
 
-  handleCloseButtonClick() {
+  handleCloseButtonClick(){
     this.props.selectElement(undefined);
   }
 
-  render() {
+  render(){
     let closeButtonStyle = {
-      margin: 0,
-      backgroundColor: '#23323E',
-      width: 88,
-      float: 'right'
+      margin:0,
+      backgroundColor:'#23323E',
+      width:88,
+      float:'right',
     };
     return (
       <div id="element-detail-container">
         <button id="close-button" style={closeButtonStyle} onClick={this.handleCloseButtonClick.bind(this)}>{this.props.I18n.getTrans("i.close")}</button>
         <p className="symbol">{this.props.element.symbol}</p>
-        <div style={{ clear: 'both' }}></div>
+        <div style={{clear:'both'}} />
         <p className="name">{this.props.element.name}</p>
         <p className="description">{this.props.element.summary}</p>
         <div className="spec-box first">

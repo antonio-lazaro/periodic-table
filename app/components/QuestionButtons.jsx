@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { PAGES, MODES } from '../constants/constants.jsx';
+import {PAGES, MODES} from '../constants/constants.jsx';
 
-import { changePage } from '../reducers/actions.jsx';
+import {changePage} from '../reducers/actions.jsx';
 
 export default class QuestionButtons extends React.Component {
   constructor(props){
     super(props);
   }
 
-  goToPT() {
+  goToPT(){
     this.props.dispatch(changePage(PAGES.LEARN_PAGE));
   }
 

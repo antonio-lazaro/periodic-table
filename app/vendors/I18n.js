@@ -66,11 +66,11 @@ function isValidLanguage(language){
   return ((typeof language === "string") && (["en", "es"].indexOf(language) !== -1));
 }
 
-export function getLanguage() {
+export function getLanguage(){
   return locale;
 }
 
-export function setLanguage(language) {
+export function setLanguage(language){
   locale = language;
 }
 

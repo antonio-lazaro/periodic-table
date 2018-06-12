@@ -1,65 +1,65 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import './../assets/scss/periodicTable.scss';
 
 import ELEMENTS from '../constants/constants';
-import { elements as elementsEN } from '../constants/PeriodicTableJSON.json';
-import { elements as elementsES } from '../constants/PeriodicTableJSON.es.json';
-import { PAGES } from '../constants/constants.jsx';
+import {elements as elementsEN} from '../constants/PeriodicTableJSON.json';
+import {elements as elementsES} from '../constants/PeriodicTableJSON.es.json';
+import {PAGES} from '../constants/constants.jsx';
 
 import Element from './Element.jsx';
 
 export class PeriodicTable extends React.Component {
-  constructor(props) {
+  constructor(props){
     super(props);
   }
 
-  getElementComponent(i) {
+  getElementComponent(i){
     return (
       <Element
         element={this.elements[i - 1]}
         key={this.elements[i - 1].name}
         selectElement={this.props.selectElement}
-        selected={(this.props.selectedElements.includes(this.elements[i - 1])) ? true : false }
+        selected={!!(this.props.selectedElements.includes(this.elements[i - 1])) }
         answered={this.props.answered}
-        correct={(this.props.askedElements && this.props.askedElements.includes(this.elements[i - 1])) ? true : false }
+        correct={!!((this.props.askedElements && this.props.askedElements.includes(this.elements[i - 1]))) }
         show={this.props.showElements}
         />
     );
   }
 
-  render() {
+  render(){
     this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
 
     // Row 2
-    var rowTwo = [];
-    for (var i = 3; i <= 10; i++) {
+    let rowTwo = [];
+    for(var i = 3; i <= 10; i++){
       rowTwo.push(this.getElementComponent(i));
     }
 
     // Row 3
-    var rowThree = [];
-    for (var i = 11; i <= 18; i++) {
+    let rowThree = [];
+    for(var i = 11; i <= 18; i++){
       rowThree.push(this.getElementComponent(i));
     }
 
     // Row 4
-    var rowFour = [];
-    for (var i = 19; i <= 36; i++) {
+    let rowFour = [];
+    for(var i = 19; i <= 36; i++){
       rowFour.push(this.getElementComponent(i));
     }
 
     // Row 5
-    var rowFive = [];
-    for (var i = 37; i <= 54; i++) {
+    let rowFive = [];
+    for(var i = 37; i <= 54; i++){
       rowFive.push(this.getElementComponent(i));
     }
 
     // Row 6
-    var rowSix = [];
-    for (var i = 55; i <= 86; i++) {
-      if (!(i >= 58 && i <= 71)) {
-        if (i == 57) {
+    let rowSix = [];
+    for(var i = 55; i <= 86; i++){
+      if(!(i >= 58 && i <= 71)){
+        if(i == 57){
           rowSix.push(
             <td key={'lantanos'} id="lantanos-cell">
               <p>57-71</p>
@@ -72,10 +72,10 @@ export class PeriodicTable extends React.Component {
     }
 
     // Row 7
-    var rowSeven = [];
-    for (var i = 87; i <= 118; i++) {
-      if (!(i >= 90 && i <= 103)) {
-        if (i == 89) {
+    let rowSeven = [];
+    for(var i = 87; i <= 118; i++){
+      if(!(i >= 90 && i <= 103)){
+        if(i == 89){
           rowSeven.push(
             <td key={'actinios'} id="actinios-cell">
               <p>89-103</p>
@@ -88,14 +88,14 @@ export class PeriodicTable extends React.Component {
     }
 
     // Lantanos
-    var lanthanides = [];
-    for (var i = 57; i <= 71; i++) {
+    let lanthanides = [];
+    for(var i = 57; i <= 71; i++){
       lanthanides.push(this.getElementComponent(i));
     }
 
     // Actinios
-    var actinides = [];
-    for (var i = 89; i <= 103; i++) {
+    let actinides = [];
+    for(var i = 89; i <= 103; i++){
       actinides.push(this.getElementComponent(i));
     }
 
@@ -107,12 +107,12 @@ export class PeriodicTable extends React.Component {
 
               <tr>
                 {this.getElementComponent(1)}
-                <td></td>
-                <td colSpan="10" rowSpan="3"></td>
-                <td colSpan="5"></td>
+                <td />
+                <td colSpan="10" rowSpan="3" />
+                <td colSpan="5" />
                 {this.getElementComponent(2)}
               </tr>
-              
+
               <tr>{rowTwo}</tr>
 
               <tr>{rowThree}</tr>
@@ -125,15 +125,15 @@ export class PeriodicTable extends React.Component {
 
               <tr>{rowSeven}</tr>
 
-              <tr style={{ height: 55 }}></tr>
+              <tr style={{height:55}} />
 
               <tr>
-                <td colSpan="2"></td>
+                <td colSpan="2" />
                 {lanthanides}
               </tr>
 
               <tr>
-                <td colSpan="2"></td>
+                <td colSpan="2" />
                 {actinides}
               </tr>
 
@@ -145,9 +145,9 @@ export class PeriodicTable extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state){
   return {
-    page: state.page
+    page:state.page,
   };
 }
 

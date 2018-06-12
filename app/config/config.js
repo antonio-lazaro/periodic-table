@@ -7,12 +7,12 @@ export let GLOBAL_CONFIG = {
     // locale: "es",
     adaptive:true,
     finish_screen:true,
-    scorm: {
+    scorm:{
       completion_threshold:0.5,
       score_threshold:0.6,
     },
     n:3,
-    mode: 'LEARN' // LEARN or EXAM
+    mode:'LEARN', // LEARN or EXAM
   },
   production:{
     debug:false,
@@ -25,8 +25,8 @@ export let GLOBAL_CONFIG = {
       completion_threshold:0.5,
       score_threshold:0.6,
     },
-    n: 5,
-    mode: 'EXAM'
+    n:5,
+    mode:'LEARN',
   },
 };
 

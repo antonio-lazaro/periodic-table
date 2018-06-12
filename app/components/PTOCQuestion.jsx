@@ -12,9 +12,9 @@ export default class PTOCQuestion extends React.Component {
     super(props);
 
     this.state = {
-      answered: this.props.question.answered,
-      askedElement: this.props.question.askedElement,
-      selectedElement: this.props.question.selectedElement
+      answered:this.props.question.answered,
+      askedElement:this.props.question.askedElement,
+      selectedElement:this.props.question.selectedElement,
     };
 
     this.selectElement = this.selectElement.bind(this);
@@ -23,19 +23,19 @@ export default class PTOCQuestion extends React.Component {
     this.onNextQuestion = this.onNextQuestion.bind(this);
   }
 
-  selectElement(element) {
-    if (this.state.answered) { return }
-    this.setState({ selectedElement: element });
+  selectElement(element){
+    if(this.state.answered){ return; }
+    this.setState({selectedElement:element});
     let question = this.props.question;
     question.selectedElement = element;
     this.props.updateQuestion(question);
   }
-  onAnswerQuestion() {
+  onAnswerQuestion(){
     // Send data via SCORM
     let objective = this.props.objective;
     let scorePercentage = 0;
 
-    if (this.state.selectedElement && this.state.selectedElement == this.state.askedElement) {
+    if(this.state.selectedElement && this.state.selectedElement == this.state.askedElement){
       scorePercentage = 1;
     } else {
       scorePercentage = 0;
@@ -49,13 +49,13 @@ export default class PTOCQuestion extends React.Component {
     question.answered = true;
     this.props.updateQuestion(question);
   }
-  onResetQuestion() {
-    this.setState({selectedElement: undefined, answered: false});
+  onResetQuestion(){
+    this.setState({selectedElement:undefined, answered:false});
   }
-  onNextQuestion() {
+  onNextQuestion(){
     this.props.onNextQuestion();
   }
-  render() {
+  render(){
     let question = this.props.I18n.getTransWithParams(this.props.question.question, this.state.askedElement);
 
     return (

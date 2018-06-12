@@ -16,18 +16,18 @@ export default class OCQuestion extends React.Component {
     this.onNextQuestion = this.onNextQuestion.bind(this);
   }
 
-  handleChoiceChange(choice) {
-    if (this.props.question.answered) { return }
+  handleChoiceChange(choice){
+    if(this.props.question.answered){ return; }
     let question = this.props.question;
     question.checkedPosition = choice.index;
     this.props.updateQuestion(question);
   }
-  onAnswerQuestion() {
+  onAnswerQuestion(){
     // Send data via SCORM
     let objective = this.props.objective;
     let scorePercentage = 0;
 
-    if (this.props.question.checkedPosition && this.props.question.checkedPosition == this.props.question.randomPosition) {
+    if(this.props.question.checkedPosition && this.props.question.checkedPosition == this.props.question.randomPosition){
       scorePercentage = 1;
     } else {
       scorePercentage = 0;
@@ -40,27 +40,27 @@ export default class OCQuestion extends React.Component {
     question.answered = true;
     this.props.updateQuestion(question);
   }
-  onResetQuestion() {
+  onResetQuestion(){
     let question = this.props.question;
     question.checkedPosition = undefined;
     question.answered = false;
     this.props.updateQuestion(question);
     this.props.dispatch(objectiveAccomplished(this.props.objective.id, 0));
   }
-  onNextQuestion() {
+  onNextQuestion(){
     this.props.onNextQuestion();
   }
-  render() {
+  render(){
     let question = this.props.I18n.getTransWithParams(this.props.question.question, this.props.question.askedElement);
 
     let choices = [];
     let j = 0;
 
-    for(let i = 0; i < 4; i++) {
-      if (i == this.props.question.randomPosition) {
-        choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.props.question.askedElement[this.props.question.answerField], answer: true, index: i }} checked={(i == this.props.question.checkedPosition) ? true : false} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.props.question.answered}/>);
+    for(let i = 0; i < 4; i++){
+      if(i == this.props.question.randomPosition){
+        choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{value:this.props.question.askedElement[this.props.question.answerField], answer:true, index:i}} checked={(i == this.props.question.checkedPosition)} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.props.question.answered}/>);
       } else {
-        choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.props.question.randomElements[j][this.props.question.answerField], answer: false, index: i }} checked={(i == this.props.question.checkedPosition) ? true : false} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.props.question.answered}/>);
+        choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{value:this.props.question.randomElements[j][this.props.question.answerField], answer:false, index:i}} checked={(i == this.props.question.checkedPosition)} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.props.question.answered}/>);
         j += 1;
       }
     }
