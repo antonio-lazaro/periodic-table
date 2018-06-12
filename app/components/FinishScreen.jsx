@@ -41,11 +41,12 @@ export default class FinishScreen extends React.Component {
   }
   render(){
     let finishTitleText = this.props.I18n.getTrans("i.finish_screen_title_full", { score:Math.trunc(this.props.tracking.score * 100) });
+    let goToPTButton = (this.props.config.mode == "LEARN") ? <button type="button" onClick={this.handleClick.bind(this)}>{this.props.I18n.getTrans("i.go_to_pt!")}</button> : "";
     let resetButton = (this.props.config.mode == "LEARN") ? <button type="button" onClick={this.handleReset.bind(this)}>{this.props.I18n.getTrans("i.reset_quiz!")}</button> : "";
     return (
       <div className="finish_screen">
         <p id="finish_title">{finishTitleText}</p>
-        <button type="button" onClick={this.handleClick.bind(this)}>{this.props.I18n.getTrans("i.go_to_pt!")}</button>
+        {goToPTButton}
         {resetButton}
       </div>
     );
