@@ -38,6 +38,7 @@ export default class OCQuestion extends React.Component {
     }
   }
   handleChoiceChange(choice) {
+    if (this.state.answered) { return }
     this.setState({checkedPosition: choice.index});
   }
   onAnswerQuestion() {

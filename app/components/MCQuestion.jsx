@@ -59,6 +59,7 @@ export default class MCQuestion extends React.Component {
     }
   }
   handleChoiceChange(choice) {
+    if (this.state.answered) { return }
     let newSelectedChoices = Object.assign([], this.state.checkedPositions);
     let indexOf = newSelectedChoices.indexOf(choice.index);
     if (indexOf === -1) {

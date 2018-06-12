@@ -25,6 +25,7 @@ export default class PTOCQuestion extends React.Component {
     }
   }
   selectElement(element) {
+    if (this.state.answered) { return }
     this.setState({ selectedElement: element });
   }
   onAnswerQuestion() {

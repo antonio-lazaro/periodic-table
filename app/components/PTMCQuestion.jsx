@@ -31,6 +31,7 @@ export default class PTMCQuestion extends React.Component {
     }
   }
   selectElement(element) {
+    if (this.state.answered) { return }
     let newSelectedElements = Object.assign([], this.state.selectedElements);
     let indexOf = newSelectedElements.indexOf(element);
     if (indexOf === -1) {
