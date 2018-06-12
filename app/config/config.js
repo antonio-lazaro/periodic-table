@@ -3,15 +3,15 @@ export let GLOBAL_CONFIG = {
     debug:true,
     debug_scorm_api:false,
     debug_scorm_api_window:false,
-    available_locales:["en", "es"],
-    // locale: "es",
+    //available_locales:["en", "es"],
+    locale: "es",
     adaptive:true,
     finish_screen:true,
     scorm: {
       completion_threshold:0.5,
       score_threshold:0.6,
     },
-    n:3,
+    n:1,
     mode: 'LEARN' // LEARN or EXAM
   },
   production:{

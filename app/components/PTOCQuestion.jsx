@@ -11,22 +11,29 @@ export default class PTOCQuestion extends React.Component {
   constructor(props){
     super(props);
 
-    let askedElement = this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)];
-
     this.state = {
-      answered: false,
-      askedElement: askedElement,
-      selectedElement: undefined
+      answered: this.props.question.answered,
+      askedElement: this.props.question.askedElement,
+      selectedElement: this.props.question.selectedElement
     };
+
+    this.selectElement = this.selectElement.bind(this);
+    this.onAnswerQuestion = this.onAnswerQuestion.bind(this);
+    this.onResetQuestion = this.onResetQuestion.bind(this);
+    this.onNextQuestion = this.onNextQuestion.bind(this);
   }
   componentWillUpdate(prevProps, prevState) {
     if(prevProps.question !== this.props.question){
       this.setState({selectedElement: undefined, answered:false});
     }
   }
+
   selectElement(element) {
     if (this.state.answered) { return }
     this.setState({ selectedElement: element });
+    let question = this.props.question;
+    question.selectedElement = element;
+    this.props.updateQuestion(question);
   }
   onAnswerQuestion() {
     // Send data via SCORM
@@ -43,17 +50,15 @@ export default class PTOCQuestion extends React.Component {
 
     // Mark question as answered
     this.setState({answered:true});
+    let question = this.props.question;
+    question.answered = true;
+    this.props.updateQuestion(question);
   }
   onResetQuestion() {
     this.setState({selectedElement: undefined, answered: false});
   }
   onNextQuestion() {
     this.props.onNextQuestion();
-
-    this.setState({
-      askedElement:  this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)],
-      selectedElement: undefined,
-    });
   }
   render() {
     let question = this.props.I18n.getTransWithParams(this.props.question.question, this.state.askedElement);

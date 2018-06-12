@@ -30,7 +30,8 @@ export let LOCALES = {
     "i.state":"state (A.T.)",
     "i.lanthanides": "Lanthanides",
     "i.actinides": "Actinides",
-    "i.close": "Close"
+    "i.close": "Close",
+    "i.level": "Level"
   },
   es:{
     "i.learn_page_title":"Tabla Periódica",
@@ -62,6 +63,7 @@ export let LOCALES = {
     "i.state":"estado (T.A.)",
     "i.lanthanides": "Lantanos",
     "i.actinides": "Actinios",
-    "i.close": "Cerrar"
+    "i.close": "Cerrar",
+    "i.level": "Nivel"
   },
 };

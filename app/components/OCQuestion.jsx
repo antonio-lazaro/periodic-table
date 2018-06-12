@@ -10,43 +10,24 @@ export default class OCQuestion extends React.Component {
   constructor(props){
     super(props);
 
-    let askedElement = this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)];
-    let randomPosition = Math.floor(Math.random() * 4);
-
-    let incorrectAnswers = this.props.posibleElements.filter((element) => {
-      return element[this.props.question.answerField] != askedElement[this.props.question.answerField]
-    })
-
-    let randomElements = [];
-
-    for(let i = 0; i < 4; i++) {
-      let randomElement = incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
-      randomElements.push(randomElement);
-    }
-
-    this.state = {
-      answered: false,
-      askedElement: askedElement,
-      randomPosition: randomPosition,
-      randomElements: randomElements,
-      checkedPosition: undefined
-    };
+    this.handleChoiceChange = this.handleChoiceChange.bind(this);
+    this.onAnswerQuestion = this.onAnswerQuestion.bind(this);
+    this.onResetQuestion = this.onResetQuestion.bind(this);
+    this.onNextQuestion = this.onNextQuestion.bind(this);
   }
-  componentWillUpdate(prevProps, prevState) {
-    if(prevProps.question !== this.props.question){
-      this.setState({checkedPosition: undefined, answered:false});
-    }
-  }
+
   handleChoiceChange(choice) {
-    if (this.state.answered) { return }
-    this.setState({checkedPosition: choice.index});
+    if (this.props.question.answered) { return }
+    let question = this.props.question;
+    question.checkedPosition = choice.index;
+    this.props.updateQuestion(question);
   }
   onAnswerQuestion() {
     // Send data via SCORM
     let objective = this.props.objective;
     let scorePercentage = 0;
 
-    if (this.state.checkedPosition && this.state.checkedPosition == this.state.randomPosition) {
+    if (this.props.question.checkedPosition && this.props.question.checkedPosition == this.props.question.randomPosition) {
       scorePercentage = 1;
     } else {
       scorePercentage = 0;
@@ -55,47 +36,31 @@ export default class OCQuestion extends React.Component {
     this.props.dispatch(objectiveAccomplished(objective.id, objective.score * scorePercentage));
 
     // Mark question as answered
-    this.setState({answered:true});
+    let question = this.props.question;
+    question.answered = true;
+    this.props.updateQuestion(question);
   }
   onResetQuestion() {
-    this.setState({checkedPosition: undefined, answered: false});
+    let question = this.props.question;
+    question.checkedPosition = undefined;
+    question.answered = false;
+    this.props.updateQuestion(question);
+    this.props.dispatch(objectiveAccomplished(this.props.objective.id, 0));
   }
   onNextQuestion() {
     this.props.onNextQuestion();
-
-    let randomElements = [];
-
-    for(let i = 0; i < 4; i++) {
-      let randomElement = this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)];
-      randomElements.push(randomElement);
-    }
-
-    this.setState({
-      askedElement:  this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)],
-      randomPosition: Math.floor(Math.random() * 4),
-      randomElements: randomElements,
-      checkedPosition: undefined,
-    });
   }
   render() {
-    // let question = this.props.question.question.replace(/__(.*)__/g, function (x, param) {
-    //   return param; // this.state.askedElement[param];
-    // });
-
-    // let question = this.props.question.question.replace(/__name__/g, this.state.askedElement['name']);
-    // question = this.props.question.question.replace(/__symbol__/g, this.state.askedElement['symbol']);
-    // question = this.props.question.question.replace(/__atomicNumber__/g, elements.indexOf(this.state.askedElement) + 1);
-
-    let question = this.props.I18n.getTransWithParams(this.props.question.question, this.state.askedElement);
+    let question = this.props.I18n.getTransWithParams(this.props.question.question, this.props.question.askedElement);
 
     let choices = [];
     let j = 0;
 
     for(let i = 0; i < 4; i++) {
-      if (i == this.state.randomPosition) {
-        choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.state.askedElement[this.props.question.answerField], answer: true, index: i }} checked={(i == this.state.checkedPosition) ? true : false} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.state.answered}/>);
+      if (i == this.props.question.randomPosition) {
+        choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.props.question.askedElement[this.props.question.answerField], answer: true, index: i }} checked={(i == this.props.question.checkedPosition) ? true : false} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.props.question.answered}/>);
       } else {
-        choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.state.randomElements[j][this.props.question.answerField], answer: false, index: i }} checked={(i == this.state.checkedPosition) ? true : false} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.state.answered}/>);
+        choices.push(<OCQuestionChoice key={"MyQuestion_" + "question_choice_" + i} choice={{ value: this.props.question.randomElements[j][this.props.question.answerField], answer: false, index: i }} checked={(i == this.props.question.checkedPosition) ? true : false} handleChange={this.handleChoiceChange.bind(this)} questionAnswered={this.props.question.answered}/>);
         j += 1;
       }
     }
@@ -105,7 +70,7 @@ export default class OCQuestion extends React.Component {
         <div className="question_choices">
           {choices}
         </div>
-        <QuestionButtons I18n={this.props.I18n} onAnswerQuestion={this.onAnswerQuestion.bind(this)} onResetQuestion={this.onResetQuestion.bind(this)} onResetQuiz={this.props.onResetQuiz} onNextQuestion={this.onNextQuestion.bind(this)} answered={this.state.answered} quizCompleted={this.props.quizCompleted} allow_finish={this.props.isLastQuestion} dispatch={this.props.dispatch} mode={this.props.mode} />
+        <QuestionButtons I18n={this.props.I18n} onAnswerQuestion={this.onAnswerQuestion.bind(this)} onResetQuestion={this.onResetQuestion.bind(this)} onResetQuiz={this.props.onResetQuiz} onNextQuestion={this.onNextQuestion.bind(this)} answered={this.props.question.answered} quizCompleted={this.props.question.quizCompleted} allow_finish={this.props.isLastQuestion} dispatch={this.props.dispatch} mode={this.props.mode} />
       </div>
     );
   }

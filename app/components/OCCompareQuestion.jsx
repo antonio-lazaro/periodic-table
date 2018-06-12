@@ -10,54 +10,19 @@ export default class OCCompareQuestion extends React.Component {
   constructor(props){
     super(props);
 
-    let askedElement = this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)];
-    let randomPosition = Math.floor(Math.random() * 4);
-
-    let condition = this.props.question.condition;
-    let correctAnswers;
-
-    if (condition == '=') {
-      correctAnswers = this.props.posibleElements.filter((element) => {
-        if (condition == '=') {
-          return element[this.props.question.comparedField] == askedElement[this.props.question.comparedField]
-        }
-        return false;
-      });
-    }
-
-    let incorrectAnswers = this.props.posibleElements.filter((element) => {
-      if (condition == '=') {
-        return element[this.props.question.comparedField] != askedElement[this.props.question.comparedField]
-      } else if (condition == '>') {
-        return element[this.props.question.comparedField] > askedElement[this.props.question.comparedField]
-      } else if (condition == '<') {
-        return element[this.props.question.comparedField] < askedElement[this.props.question.comparedField]
-      }
-      return false;
-    })
-
-    let correctElement;
-    if (condition == '=') {
-      correctElement = correctAnswers[Math.floor(Math.random() * correctAnswers.length)];
-    } else {
-      correctElement = askedElement;
-    }
-
-    let randomElements = [];
-
-    for(let i = 0; i < 4; i++) {
-      let randomElement = incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
-      randomElements.push(randomElement);
-    }
-
     this.state = {
-      answered: false,
-      askedElement: askedElement,
-      correctElement: correctElement,
-      randomPosition: randomPosition,
-      randomElements: randomElements,
-      checkedPosition: undefined
+      answered: this.props.question.answered,
+      askedElement: this.props.question.askedElement,
+      correctElement: this.props.question.correctElement,
+      randomPosition: this.props.question.randomPosition,
+      randomElements: this.props.question.randomElements,
+      checkedPosition: this.props.question.checkedPosition
     };
+
+    this.handleChoiceChange = this.handleChoiceChange.bind(this);
+    this.onAnswerQuestion = this.onAnswerQuestion.bind(this);
+    this.onResetQuestion = this.onResetQuestion.bind(this);
+    this.onNextQuestion = this.onNextQuestion.bind(this);
   }
   componentWillUpdate(prevProps, prevState) {
     if(prevProps.question !== this.props.question){
@@ -66,6 +31,9 @@ export default class OCCompareQuestion extends React.Component {
   }
   handleChoiceChange(choice) {
     this.setState({checkedPosition: choice.index});
+    let question = this.props.question;
+    question.checkedPosition = choice.index;
+    this.props.updateQuestion(question);
   }
   onAnswerQuestion() {
     // Send data via SCORM
@@ -82,59 +50,15 @@ export default class OCCompareQuestion extends React.Component {
 
     // Mark question as answered
     this.setState({answered:true});
+    let question = this.props.question;
+    question.answered = true;
+    this.props.updateQuestion(question);
   }
   onResetQuestion() {
     this.setState({checkedPosition: undefined, answered: false});
   }
   onNextQuestion() {
     this.props.onNextQuestion();
-
-    let askedElement = this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)];
-
-    let condition = this.props.question.condition;
-    let correctAnswers;
-
-    if (condition == '=') {
-      correctAnswers = this.props.posibleElements.filter((element) => {
-        if (condition == '=') {
-          return element[this.props.question.comparedField] == askedElement[this.props.question.comparedField]
-        }
-        return false;
-      });
-    }
-
-    let incorrectAnswers = this.props.posibleElements.filter((element) => {
-      if (condition == '=') {
-        return element[this.props.question.comparedField] != askedElement[this.props.question.comparedField]
-      } else if (condition == '>') {
-        return element[this.props.question.comparedField] > askedElement[this.props.question.comparedField]
-      } else if (condition == '<') {
-        return element[this.props.question.comparedField] < askedElement[this.props.question.comparedField]
-      }
-      return false;
-    })
-
-    let correctElement;
-    if (condition == '=') {
-      correctElement = correctAnswers[Math.floor(Math.random() * correctAnswers.length)];
-    } else {
-      correctElement = askedElement;
-    }
-
-    let randomElements = [];
-
-    for(let i = 0; i < 4; i++) {
-      let randomElement = incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
-      randomElements.push(randomElement);
-    }
-
-    this.setState({
-      askedElement:  askedElement,
-      correctElement: correctElement,
-      randomPosition: Math.floor(Math.random() * 4),
-      randomElements: randomElements,
-      checkedPosition: undefined,
-    });
   }
   render() {
     // let question = this.props.question.question.replace(/__(.*)__/g, function (x, param) {

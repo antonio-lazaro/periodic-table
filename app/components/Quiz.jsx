@@ -48,26 +48,16 @@ export default class Quiz extends React.Component {
       this.props.dispatch(startQuiz());
     }
 
-    let difficulty = this.props.user_profile.learner_preference.difficulty;
-
-    // Language
-    this.elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
-
-    // Get posible asked Elments
-    let posibleElements = this.elements.filter((element) => {
-      if (difficulty < 6) {
-        return (element.ypos <= 6 || element.xpos == 1)
-      }
-      return true
-    });
-
-    this.posibleElements = posibleElements;
-
     this.state = {
       quiz: quiz,
       current_question_index: current_question_index,
       objectives: objectives
     };
+
+    this.createNewQuiz = this.createNewQuiz.bind(this);
+    this.onNextQuestion = this.onNextQuestion.bind(this);
+    this.onResetQuiz = this.onResetQuiz.bind(this);
+    this.updateQuestion = this.updateQuestion.bind(this);
   }
 
   createObjectives(quiz) {
@@ -88,7 +78,6 @@ export default class Quiz extends React.Component {
 
     // Adaptive behaviour
     // Sort questions based on difficulty
-    // 0.5 * element difficulty (ypos) + 0.5 * question difficulty
     let adaptive_sorted = false;
     if((this.props.config.adaptive === true) && (typeof this.props.user_profile === "object") && (typeof this.props.user_profile.learner_preference === "object") && (typeof difficulty === "number")) {
       if((difficulty >= 0) && (difficulty <= 10)) {
@@ -107,12 +96,167 @@ export default class Quiz extends React.Component {
       questions = Utils.shuffleArray(questions);
     }
 
-    if((typeof this.props.config.n === "number") && (this.props.config.n >= 1)) {
-      // Limit number of questions
-      questions = questions.slice(0, Math.min(this.props.config.n, questions.length));
+    // Language
+    let elements = (this.props.I18n.getLanguage() == 'es') ? elementsES : elementsEN;
+
+    // Get posible asked Elments
+    let posibleElements = elements.filter((element) => {
+      if (difficulty < 6) {
+        return (element.ypos <= 6 || element.xpos == 1)
+      }
+      return true
+    });
+
+    // Choose questions
+    let questionsToAsk = [];
+    for (var i = 0; i < this.props.config.n; i++) {
+      let randomQuestionIndex = Math.floor(Math.random() * questions.length);
+      let question = Object.assign({}, questions[randomQuestionIndex])
+      let askedElement;
+      let randomElement;
+      let correctAnswers;
+      let incorrectAnswers;
+      let randomElements;
+      let randomPosition;
+      switch (question.answerType) {
+        case ANSWER_TYPES.SELECT_ONE_ANSWER:
+          askedElement = posibleElements[Math.floor(Math.random() * posibleElements.length)];
+          randomPosition = Math.floor(Math.random() * 4);
+
+          incorrectAnswers = posibleElements.filter((element) => {
+            return element[question.answerField] != askedElement[question.answerField]
+          })
+
+          randomElements = [];
+
+          for(let i = 0; i < 4; i++) {
+            let randomElement = incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
+            randomElements.push(randomElement);
+          }
+
+          question.askedElement = askedElement;
+          question.randomPosition = randomPosition;
+          question.randomElements = randomElements;
+          question.checkedPosition = undefined;
+          question.answered = false;
+          break;
+        case ANSWER_TYPES.SELECT_MULTIPLE_ANSWER:
+          // Select a random element
+          randomElement = posibleElements[Math.floor(Math.random() * posibleElements.length)];
+
+          // Filter all correct answers
+          correctAnswers = posibleElements.filter((element) => {
+            return element[question.askedField] == randomElement[question.askedField]
+          });
+
+          // Filter all incorrect answers
+          incorrectAnswers = posibleElements.filter((element) => {
+            return element[question.askedField] != randomElement[question.askedField]
+          })
+
+          let numberOfCorrectAnswers = Math.floor(Math.random() * 4);
+          while (numberOfCorrectAnswers > correctAnswers.length) {
+            numberOfCorrectAnswers -= 1;
+          }
+
+          let askedElements = [];
+          for (let i = 0; i < numberOfCorrectAnswers; i++) {
+            askedElements.push(correctAnswers[Math.floor(Math.random() * correctAnswers.length)]);
+          }
+
+          let randomPositions = [];
+          let posiblePositions = [1,2,3,4];
+          for (let i = 0; i < numberOfCorrectAnswers; i++) {
+            let rnNumber = posiblePositions.slice(Math.floor(Math.random() * posiblePositions.length), 1);
+            randomPositions.push(rnNumber);
+          }
+
+          randomElements = [];
+          for(let i = 0; i < 4; i++) {
+            let randomElement2 = incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
+            randomElements.push(randomElement2);
+          }
+
+          question.askedElements = askedElements;
+          question.randomPositions = randomPositions;
+          question.randomElements = randomElements;
+          question.randomElement = randomElement;
+          question.checkedPositions = [];
+          question.answered = false;
+          break;
+        case ANSWER_TYPES.PT_SELECT_ONE_ANSWER:
+          askedElement = posibleElements[Math.floor(Math.random() * posibleElements.length)];
+          question.askedElement = askedElement;
+          question.selectedElement = undefined;
+          question.answered = false;
+          break;
+        case ANSWER_TYPES.PT_SELECT_MULTIPLE_ANSWER:
+          // Select a random element
+          randomElement = posibleElements[Math.floor(Math.random() * posibleElements.length)];
+
+          // Filter all correct answers
+          correctAnswers = elements.filter((element) => {
+            return element[question.askedField] == randomElement[question.askedField]
+          });
+
+          question.randomElement = randomElement;
+          question.correctAnswers = correctAnswers;
+          question.selectedElements = [];
+          question.answered = false;
+          break;
+        case ANSWER_TYPES.SELECT_ONE_ANSWER_COMPARE:
+          askedElement = posibleElements[Math.floor(Math.random() * posibleElements.length)];
+          randomPosition = Math.floor(Math.random() * 4);
+
+          let condition = question.condition;
+
+          if (condition == '=') {
+            correctAnswers = posibleElements.filter((element) => {
+              if (condition == '=') {
+                return element[question.comparedField] == askedElement[question.comparedField]
+              }
+              return false;
+            });
+          }
+
+          incorrectAnswers = posibleElements.filter((element) => {
+            if (condition == '=') {
+              return element[question.comparedField] != askedElement[question.comparedField]
+            } else if (condition == '>') {
+              return element[question.comparedField] > askedElement[question.comparedField]
+            } else if (condition == '<') {
+              return element[question.comparedField] < askedElement[question.comparedField]
+            }
+            return false;
+          })
+
+          let correctElement;
+          if (condition == '=') {
+            correctElement = correctAnswers[Math.floor(Math.random() * correctAnswers.length)];
+          } else {
+            correctElement = askedElement;
+          }
+
+          randomElements = [];
+
+          for(let i = 0; i < 4; i++) {
+            let randomElement = incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
+            randomElements.push(randomElement);
+          }
+
+          question.askedElement = askedElement;
+          question.correctElement = correctElement;
+          question.randomPosition = randomPosition;
+          question.randomElements = randomElements;
+          question.checkedPosition = undefined;
+          question.answered = false;
+          break;
+      }
+      
+      questionsToAsk.push(question);
     }
 
-    quiz.questions = questions;
+    quiz.questions = questionsToAsk;
 
     return quiz;
   }
@@ -131,6 +275,12 @@ export default class Quiz extends React.Component {
     this.setState({ current_question_index: 1 });
     this.props.dispatch(updateCurrentQuestionIndex(1));
     this.props.dispatch(resetObjectives());
+    this.forceUpdate();
+  }
+
+  updateQuestion(question) {
+    let questions = this.props.quiz.questions;
+    this.props.dispatch(updateQuestions(questions));
   }
 
   render() {
@@ -144,19 +294,19 @@ export default class Quiz extends React.Component {
 
     switch (currentQuestion.answerType) {
       case ANSWER_TYPES.SELECT_ONE_ANSWER:
-        currentQuestionRender = (<OCQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.config.mode} posibleElements={this.posibleElements} />);
+        currentQuestionRender = (<OCQuestion question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.config.mode} updateQuestion={this.updateQuestion} />);
         break;
       case ANSWER_TYPES.SELECT_MULTIPLE_ANSWER:
-        currentQuestionRender = (<MCQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.config.mode} posibleElements={this.posibleElements} />);
+        currentQuestionRender = (<MCQuestion question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.config.mode} updateQuestion={this.updateQuestion} />);
         break;
       case ANSWER_TYPES.PT_SELECT_ONE_ANSWER:
-        currentQuestionRender = (<PTOCQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.config.mode} posibleElements={this.posibleElements} />);
+        currentQuestionRender = (<PTOCQuestion question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.config.mode} updateQuestion={this.updateQuestion} />);
         break;
       case ANSWER_TYPES.PT_SELECT_MULTIPLE_ANSWER:
-        currentQuestionRender = (<PTMCQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.config.mode} posibleElements={this.posibleElements} />);
+        currentQuestionRender = (<PTMCQuestion question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.config.mode} updateQuestion={this.updateQuestion} />);
         break;
       case ANSWER_TYPES.SELECT_ONE_ANSWER_COMPARE:
-        currentQuestionRender = (<OCCompareQuestion quizLength={this.state.quiz.questions.length} question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.config.mode} posibleElements={this.posibleElements} />);
+        currentQuestionRender = (<OCCompareQuestion question={currentQuestion} dispatch={this.props.dispatch} I18n={this.props.I18n} objective={objective} onNextQuestion={onNextQuestion} onResetQuiz={onResetQuiz} isLastQuestion={isLastQuestion} quizCompleted={this.props.tracking.finished} mode={this.props.config.mode} updateQuestion={this.updateQuestion} />);
         break;
       default:
         currentQuestionRender = "Question type not supported";

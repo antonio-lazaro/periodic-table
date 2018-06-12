@@ -10,20 +10,17 @@ export default class PTMCQuestion extends React.Component {
   constructor(props){
     super(props);
 
-    // Select a random element
-    let randomElement = this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)];
-
-    // Filter all correct answers
-    let correctAnswers = this.props.posibleElements.filter((element) => {
-      return element[this.props.question.askedField] == randomElement[this.props.question.askedField]
-    });
-
     this.state = {
-      answered: false,
-      randomElement: randomElement,
-      correctAnswers: correctAnswers,
-      selectedElements: []
+      answered: this.props.question.answered,
+      randomElement: this.props.question.randomElement,
+      correctAnswers: this.props.question.correctAnswers,
+      selectedElements: this.props.question.selectedElements
     };
+
+    this.selectElement = this.selectElement.bind(this);
+    this.onAnswerQuestion = this.onAnswerQuestion.bind(this);
+    this.onResetQuestion = this.onResetQuestion.bind(this);
+    this.onNextQuestion = this.onNextQuestion.bind(this);
   }
   componentWillUpdate(prevProps, prevState) {
     if(prevProps.question !== this.props.question){
@@ -40,6 +37,9 @@ export default class PTMCQuestion extends React.Component {
       newSelectedElements.splice(indexOf, 1);
     }
     this.setState({ selectedElements: newSelectedElements });
+    let question = this.props.question;
+    question.selectedElements = newSelectedElements;
+    this.props.updateQuestion(question);
   }
   onAnswerQuestion() {
     // Calculate score
@@ -63,18 +63,15 @@ export default class PTMCQuestion extends React.Component {
 
     // Mark question as answered
     this.setState({answered:true});
+    let question = this.props.question;
+    question.answered = true;
+    this.props.updateQuestion(question);
   }
   onResetQuestion() {
     this.setState({selectedElements: [], answered: false});
   }
   onNextQuestion() {
     this.props.onNextQuestion();
-
-    this.setState({
-      randomElement:  this.props.posibleElements[Math.floor(Math.random() * this.props.posibleElements.length)],
-      selectedElements: [],
-      answered: false
-    });
   }
   render() {
     let question = this.props.I18n.getTransWithParams(this.props.question.question, this.state.randomElement);
