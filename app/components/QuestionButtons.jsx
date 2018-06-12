@@ -17,10 +17,6 @@ export default class QuestionButtons extends React.Component {
     let disable_answer = (this.props.answered || this.props.quizCompleted);
     let disable_resetQuestion = (!this.props.answered || this.props.quizCompleted);
     let disable_next = (!this.props.answered || this.props.quizCompleted);
-    let resetQuiz = "";
-    if((this.props.allow_finish) && (disable_next === false) && (this.props.mode == MODES.LEARN)){
-      resetQuiz = (<button className="resetQuiz" onClick={this.props.onResetQuiz}>{this.props.I18n.getTrans("i.reset_quiz")}</button>);
-    }
 
     // Buttons enabled
     let answerQuestionButton = (!disable_answer) ? <button className="answerQuestion" onClick={this.props.onAnswerQuestion} disabled={disable_answer}>{this.props.I18n.getTrans("i.answer")}</button> : "";
@@ -33,7 +29,6 @@ export default class QuestionButtons extends React.Component {
         {answerQuestionButton}
         {resetQuestionButton}
         {nextQuestionButton}
-        {resetQuiz}
         {goToPTButton}
       </div>
     );

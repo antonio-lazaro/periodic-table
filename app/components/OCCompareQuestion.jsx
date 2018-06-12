@@ -24,11 +24,7 @@ export default class OCCompareQuestion extends React.Component {
     this.onResetQuestion = this.onResetQuestion.bind(this);
     this.onNextQuestion = this.onNextQuestion.bind(this);
   }
-  componentWillUpdate(prevProps, prevState) {
-    if(prevProps.question !== this.props.question){
-      this.setState({checkedPosition: undefined, answered:false});
-    }
-  }
+  
   handleChoiceChange(choice) {
     this.setState({checkedPosition: choice.index});
     let question = this.props.question;

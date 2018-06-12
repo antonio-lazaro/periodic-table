@@ -29,7 +29,6 @@ export default class OptionButtons extends React.Component {
     // Languages
     var validLns = ["en", "es"];
     var lns = [];
-    console.log()
     for(var i = 0; i < validLns.length; i++) {
       if(validLns[i] == this.props.I18n.getLanguage()) {
         lns.push(<option key={i} selected value={validLns[i]}>{validLns[i]}</option>);

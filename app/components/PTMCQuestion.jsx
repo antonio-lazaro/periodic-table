@@ -22,11 +22,6 @@ export default class PTMCQuestion extends React.Component {
     this.onResetQuestion = this.onResetQuestion.bind(this);
     this.onNextQuestion = this.onNextQuestion.bind(this);
   }
-  componentWillUpdate(prevProps, prevState) {
-    if(prevProps.question !== this.props.question){
-      this.setState({selectedElements: [], answered: false});
-    }
-  }
   selectElement(element) {
     if (this.state.answered) { return }
     let newSelectedElements = Object.assign([], this.state.selectedElements);

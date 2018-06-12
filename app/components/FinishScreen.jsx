@@ -1,7 +1,7 @@
 import React from 'react';
 import './../assets/scss/finish_screen.scss';
 
-import { changePage, resetObjectives, finishApp, finishQuiz, updateCurrentQuestionIndex } from '../reducers/actions.jsx';
+import { changePage, resetObjectives, finishApp, finishQuiz, updateCurrentQuestionIndex, update, updateQuestions } from '../reducers/actions.jsx';
 
 import { PAGES } from '../constants/constants.jsx';
 
@@ -18,7 +18,16 @@ export default class FinishScreen extends React.Component {
   }
 
   handleReset() {
+    let questions = this.props.quiz.questions;
+    for (var i = 0; i < questions.length; i++) {
+      questions[i].answered = false;
+      questions[i].checkedPosition = undefined;
+      questions[i].checkedPositions = [];
+      questions[i].selectedElement = undefined;
+      questions[i].selectedElements = [];
+    }
     this.props.dispatch(updateCurrentQuestionIndex(1));
+    this.props.dispatch(updateQuestions(questions));
     this.props.dispatch(resetObjectives());
     this.props.dispatch(finishApp(false));
   }

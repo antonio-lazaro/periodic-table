@@ -74,7 +74,7 @@ export default class Quiz extends React.Component {
     let difficulty = this.props.user_profile.learner_preference.difficulty;
 
     let quiz = this.props.QUIZ;
-    let questions = quiz.questions;
+    let questions = Object.assign([], quiz.questions);
 
     // Adaptive behaviour
     // Sort questions based on difficulty
@@ -253,12 +253,10 @@ export default class Quiz extends React.Component {
           break;
       }
       
-      questionsToAsk.push(question);
+      questionsToAsk.push(Object.assign({}, question));
     }
 
-    quiz.questions = questionsToAsk;
-
-    return quiz;
+    return { questions: questionsToAsk };
   }
 
   onNextQuestion() {
@@ -273,13 +271,24 @@ export default class Quiz extends React.Component {
 
   onResetQuiz(){
     this.setState({ current_question_index: 1 });
+    let questions = this.props.quiz.questions;
+    for (var i = 0; i < questions.length; i++) {
+      questions[i].answered = false;
+      questions[i].checkedPosition = undefined;
+      questions[i].checkedPositions = [];
+      questions[i].selectedElement = undefined;
+      questions[i].selectedElements = [];
+    }
     this.props.dispatch(updateCurrentQuestionIndex(1));
+    this.props.dispatch(updateQuestions(questions));
+    this.props.dispatch(finishApp(false));
     this.props.dispatch(resetObjectives());
-    this.forceUpdate();
+    this.props.dispatch(updateQuestions(questions));
   }
 
   updateQuestion(question) {
     let questions = this.props.quiz.questions;
+    questions[this.state.current_question_index - 1] = question;
     this.props.dispatch(updateQuestions(questions));
   }
 
