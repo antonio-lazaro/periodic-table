@@ -27,7 +27,7 @@ export default class OCQuestion extends React.Component {
     let objective = this.props.objective;
     let scorePercentage = 0;
 
-    if(this.props.question.checkedPosition && this.props.question.checkedPosition == this.props.question.randomPosition){
+    if(this.props.question.checkedPosition == this.props.question.randomPosition){
       scorePercentage = 1;
     } else {
       scorePercentage = 0;

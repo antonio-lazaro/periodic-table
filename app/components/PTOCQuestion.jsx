@@ -11,12 +11,6 @@ export default class PTOCQuestion extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {
-      answered:this.props.question.answered,
-      askedElement:this.props.question.askedElement,
-      selectedElement:this.props.question.selectedElement,
-    };
-
     this.selectElement = this.selectElement.bind(this);
     this.onAnswerQuestion = this.onAnswerQuestion.bind(this);
     this.onResetQuestion = this.onResetQuestion.bind(this);
@@ -24,8 +18,7 @@ export default class PTOCQuestion extends React.Component {
   }
 
   selectElement(element){
-    if(this.state.answered){ return; }
-    this.setState({selectedElement:element});
+    if(this.props.question.answered){ return; }
     let question = this.props.question;
     question.selectedElement = element;
     this.props.updateQuestion(question);
@@ -35,7 +28,7 @@ export default class PTOCQuestion extends React.Component {
     let objective = this.props.objective;
     let scorePercentage = 0;
 
-    if(this.state.selectedElement && this.state.selectedElement == this.state.askedElement){
+    if(this.props.question.selectedElement == this.props.question.askedElement){
       scorePercentage = 1;
     } else {
       scorePercentage = 0;
@@ -44,25 +37,28 @@ export default class PTOCQuestion extends React.Component {
     this.props.dispatch(objectiveAccomplished(objective.id, scorePercentage));
 
     // Mark question as answered
-    this.setState({answered:true});
     let question = this.props.question;
     question.answered = true;
     this.props.updateQuestion(question);
   }
   onResetQuestion(){
-    this.setState({selectedElement:undefined, answered:false});
+    let question = this.props.question;
+    question.selectedElement = undefined;
+    question.answered = false;
+    this.props.updateQuestion(question);
+    this.props.dispatch(objectiveAccomplished(this.props.objective.id, 0));
   }
   onNextQuestion(){
     this.props.onNextQuestion();
   }
   render(){
-    let question = this.props.I18n.getTransWithParams(this.props.question.question, this.state.askedElement);
+    let question = this.props.I18n.getTransWithParams(this.props.question.question, this.props.question.askedElement);
 
     return (
       <div className="question">
         <p className="title">{question}</p>
-        <PeriodicTable selectElement={this.selectElement.bind(this)} selectedElements={(this.state.selectedElement) ? [this.state.selectedElement] : []} askedElements={[this.state.askedElement]} answered={this.state.answered} showElements={this.props.question.showElements} I18n={this.props.I18n} />
-        <QuestionButtons I18n={this.props.I18n} onAnswerQuestion={this.onAnswerQuestion.bind(this)} onResetQuestion={this.onResetQuestion.bind(this)} onResetQuiz={this.props.onResetQuiz} onNextQuestion={this.onNextQuestion.bind(this)} answered={this.state.answered} quizCompleted={this.props.quizCompleted} allow_finish={this.props.isLastQuestion} dispatch={this.props.dispatch} mode={this.props.mode} />
+        <PeriodicTable selectElement={this.selectElement.bind(this)} selectedElements={(this.props.question.selectedElement) ? [this.props.question.selectedElement] : []} askedElements={[this.props.question.askedElement]} answered={this.props.question.answered} showElements={this.props.question.showElements} I18n={this.props.I18n} />
+        <QuestionButtons I18n={this.props.I18n} onAnswerQuestion={this.onAnswerQuestion.bind(this)} onResetQuestion={this.onResetQuestion.bind(this)} onResetQuiz={this.props.onResetQuiz} onNextQuestion={this.onNextQuestion.bind(this)} answered={this.props.question.answered} quizCompleted={this.props.quizCompleted} allow_finish={this.props.isLastQuestion} dispatch={this.props.dispatch} mode={this.props.mode} />
       </div>
     );
   }

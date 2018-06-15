@@ -167,7 +167,8 @@ export default class Quiz extends React.Component {
         let randomPositions = [];
         let posiblePositions = [1, 2, 3, 4];
         for(let i = 0; i < numberOfCorrectAnswers; i++){
-          let rnNumber = posiblePositions.slice(Math.floor(Math.random() * posiblePositions.length), 1);
+          let pos = Math.floor(Math.random() * posiblePositions.length);
+          let rnNumber = posiblePositions.splice(pos, 1)[0];
           randomPositions.push(rnNumber);
         }
 
@@ -222,9 +223,9 @@ export default class Quiz extends React.Component {
         incorrectAnswers = posibleElements.filter((element) => {
           if(condition == '='){
             return element[question.comparedField] != askedElement[question.comparedField];
-          } else if(condition == '>'){
-            return element[question.comparedField] > askedElement[question.comparedField];
           } else if(condition == '<'){
+            return element[question.comparedField] > askedElement[question.comparedField];
+          } else if(condition == '>'){
             return element[question.comparedField] < askedElement[question.comparedField];
           }
           return false;
