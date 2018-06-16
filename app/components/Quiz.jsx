@@ -132,6 +132,9 @@ export default class Quiz extends React.Component {
         for(let i = 0; i < 4; i++){
           let randomElement = incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
           randomElements.push(randomElement);
+          incorrectAnswers = incorrectAnswers.filter((element) => {
+            return element[question.answerField] != randomElement[question.answerField];
+          });
         }
 
         question.askedElement = askedElement;
@@ -161,11 +164,15 @@ export default class Quiz extends React.Component {
 
         let askedElements = [];
         for(let i = 0; i < numberOfCorrectAnswers; i++){
-          askedElements.push(correctAnswers[Math.floor(Math.random() * correctAnswers.length)]);
+          let correctElement = correctAnswers[Math.floor(Math.random() * correctAnswers.length)];
+          askedElements.push(correctElement);
+          correctAnswers = correctAnswers.filter((element) => {
+            return element[question.answerField] != correctElement[question.answerField];
+          });
         }
 
         let randomPositions = [];
-        let posiblePositions = [1, 2, 3, 4];
+        let posiblePositions = [0, 1, 2, 3];
         for(let i = 0; i < numberOfCorrectAnswers; i++){
           let pos = Math.floor(Math.random() * posiblePositions.length);
           let rnNumber = posiblePositions.splice(pos, 1)[0];
@@ -176,6 +183,9 @@ export default class Quiz extends React.Component {
         for(let i = 0; i < 4; i++){
           let randomElement2 = incorrectAnswers[Math.floor(Math.random() * incorrectAnswers.length)];
           randomElements.push(randomElement2);
+          incorrectAnswers = incorrectAnswers.filter((element) => {
+            return element[question.askedField] != randomElement2[question.askedField];
+          });
         }
 
         question.askedElements = askedElements;
