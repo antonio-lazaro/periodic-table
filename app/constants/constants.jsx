@@ -175,6 +175,20 @@ export const QUIZ_ES = {
     answerType:"SELECT_ONE_ANSWER",
     "difficulty":9,
   }, {
+    question:"¿Cuál de los siguientes elementos tiene mayor densidad?",
+    comparedField:"density",
+    answerField:"name",
+    condition:'>',
+    answerType:"SELECT_ONE_ANSWER_COMPARE",
+    "difficulty":8,
+  }, {
+    question:"¿Cuál de los siguientes elementos pertenece al mismo grupo que #{name}?",
+    comparedField:"category",
+    answerField:"name",
+    condition:'=',
+    answerType:"SELECT_ONE_ANSWER_COMPARE",
+    "difficulty":5,
+  }, {
     question:"Selecciona los elementos del grupo #{category}",
     answerField:"name",
     askedField:"category",
